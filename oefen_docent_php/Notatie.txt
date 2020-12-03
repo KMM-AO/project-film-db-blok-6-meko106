@@ -1,0 +1,1 @@
+the show_json works via the query string  .....php?3
