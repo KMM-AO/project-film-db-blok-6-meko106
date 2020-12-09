@@ -37,7 +37,7 @@ class Router{
         return $this->request;
     }
 
-    public function getWebroot(){
+    public function getWebroot(){ 
         if(!isset($this->webroot)){
             $script = $_SERVER['SCRIPT_NAME'];
             $this->webroot = dirname($script);
@@ -69,6 +69,7 @@ class Router{
         }else{
             $this->active_route->deploy();
         }
+        
     }
 
 }

@@ -5,10 +5,10 @@
  * @copyright 2020
  */
 
-namespace core;
+namespace core; 
 
 class Request{
-    /** properties */
+    
     private $uri;
     private $method;
     

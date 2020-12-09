@@ -2,7 +2,7 @@
 
 $this->allowed_routes = [
     new \core\Route( 
-        // new Route($request_url,$reqeust_method,$controller_class,$controller_method )
+        // new Route($request_url,$reqeust_method,$controller_class,$controller_method  )
         'test',
         'GET',
         'TestController',

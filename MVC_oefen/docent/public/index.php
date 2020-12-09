@@ -10,7 +10,7 @@
 require '../include/init.php';
 \core\Router::getInstance()->go();
 
-// the name of the map (../core)
+// the name of  the map (../core)
 
 ?>
 <!DOCTYPE html>
