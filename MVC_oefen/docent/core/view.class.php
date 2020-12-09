@@ -7,36 +7,26 @@
 
 namespace core;
 
-class View
-{
-    /** de template */
-    private $template;
-    
-    /** de variabelen */
-    private $vars;
-    
-    /** de constructor */
-    public function __construct()
-    {
+class View{
+    private $template; // instance variable template
+    private $vars; // array vars
+
+    public function __construct(){ 
         $this->vars = [];
     }
-    
-    /** SETTERS */
-    public function setTemplate($value)
-    {
+
+    public function setTemplate($value){
         $this->template = '../templates/' . $value . '.template.php';
     }
-    
-    /** variabele toevoegen */
-    public function add($key, $value)
-    {
-        $this->vars[$key] = $value;
+
+    public function add($key, $value){
+        $this->vars[$key]=$value; // adding an key and value to the vars array
+    }
+
+    public function render(){ //function render calls the vars array and the tem
+        extract($this->vars); // if you have an array and you use extract
+        // then you can echo the values of this array using the $ (and the key)
+        require $this->template;// $this->template is an html page
     }
     
-    /** het weergeven van de response */
-    public function render()
-    {
-        extract($this->vars);
-        require $this->template;
-    }
 }

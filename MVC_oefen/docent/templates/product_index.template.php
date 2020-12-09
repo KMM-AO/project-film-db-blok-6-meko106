@@ -13,12 +13,11 @@
 
 <ul>
 <?php
-    foreach ($producten as $product)
-    {
-?>
-        <li><?= $product->getNaam() ?></li>
+    foreach ($producten as $product){
+    ?>
+<li><?= $product->getNaam() ?></li>
 <?php
-    }
+}
 ?>
 </ul>
 

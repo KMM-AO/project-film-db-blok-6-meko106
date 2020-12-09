@@ -5,16 +5,15 @@
  * @copyright 2020
  */
 
-namespace core;
+namespace core; 
+//you define a namespace as an name of an root/folder
+//which you can use when you call a class
+//the name space and then the class name
+
 
 use PDO;
 
-class Database
-{
-    
-    /**
-     * static object van de class Database
-     */
+class Database{
     private static $instance;
     
     /**
