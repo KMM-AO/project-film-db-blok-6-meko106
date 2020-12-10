@@ -11,8 +11,8 @@ class Router{
 
     private function __construct(){}
     private function __clone(){}
-
-
+    
+    
     public static function getInstance(){
         if (!isset(self::$instance)){
             self::$instance=new self();
@@ -40,6 +40,7 @@ class Router{
     public function getWebroot(){ 
         if(!isset($this->webroot)){
             $script = $_SERVER['SCRIPT_NAME'];
+            //by project_jaar2
             $this->webroot = dirname($script);
 
             if($this->webroot != '/'){
@@ -48,28 +49,30 @@ class Router{
         }
         return $this->webroot;
     }
-    
+
+
     private function matchRequest(){
-        $match = false;
-        foreach ($this->getAllowedRoutes() as $route){// for each route object
-            if ($route->matches($this->getRequest())){ //if route object->matches(the done request)
-                //getRequest is the done request ($uri, $method)
+        $match = false; // match is standard false
+        foreach ($this->getAllowedRoutes() as $route){// each $route is an route object
+            if ($route->matches($this->getRequest()  ) ){ //if route object->matches(the done request)
+                //getReques returns an Request object
                 $this->active_route = $route;
                 $match = true;
             }
         }
-        return $match;
+        return $match; // active_route is the selected route object
     }
-    
+
+
     public function go(){
-        if (!$this->matchRequest()){
+        if (!$this->matchRequest()){ // if the done request does not match the allowed requests
             $view = new View();
             $view->setTemplate('404');
             $view->render();
         }else{
             $this->active_route->deploy();
         }
-        
     }
+
 
 }
