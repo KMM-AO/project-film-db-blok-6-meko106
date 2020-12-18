@@ -112,8 +112,7 @@ abstract class Model {
      * - en de classnaam is nodig om nieuwe objecten te kunnen maken: new $class()
      */
     
-    static public function index() 
-    {
+    static public function index() {
         $class = get_called_class();
 
         $query = 

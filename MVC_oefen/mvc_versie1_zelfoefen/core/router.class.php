@@ -12,7 +12,7 @@ class Router{
         if(!isset(self::$instance )){
             self::$instance=new self();
         }
-        return self::$instace;
+        return self::$instance;
     }
 
     public function getAllowedRoutes(){
@@ -25,20 +25,25 @@ class Router{
 
     public function matchRequest(){
         $match=false;
-        foreach($this->getAllowedRoutes() as $route){
-            if($route->matches($Wthis->getRequest() )  ){
+        // foreach($this->getAllowedRoutes() as $route){
+        //     if($route->matches($this->getRequest() )  ){
                 
-            }
-        }
-
+        //     }
+        // }
+        return $match;
     }
+
 
 
     public function go(){
-        if(!$this->matchRequest)
+        if(!$this->matchRequest()){
+            $view=new View();
+            $view->setTemplate('error_page');
+            $view->render();
+        }else{
+
+        }
+
     }
-
-
-
 
 }
