@@ -2,6 +2,8 @@
 
 namespace core;
 
+use PDO;
+
 
 class Database{
 

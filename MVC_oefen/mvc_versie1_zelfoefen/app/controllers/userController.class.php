@@ -1,5 +1,8 @@
 <?php
 
+namespace app\controllers;
+
+
 class userController extends Controller{
 
     public function show($getal, $naam){

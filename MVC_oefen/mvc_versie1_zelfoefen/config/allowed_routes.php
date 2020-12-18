@@ -5,7 +5,7 @@ $this->allowed_routes=[
     new \core\Route(
         'test',
         'GET',
-        'TestController',
+        'testController',
         'test'
     ),
     new \core\Route(
@@ -19,9 +19,6 @@ $this->allowed_routes=[
         'GET',
         'testController',
         'test'
-    )
-
-    
+    )  
 ]
-
 ?>

@@ -1,6 +1,7 @@
 <?php
 
-require('controller.class.php');
+namespace app\controllers;
+
 
 class ProductController extends controller{
     public $view;
