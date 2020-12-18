@@ -1,10 +1,4 @@
 <?php
-
-/**
- * @author Jeroen van den Brink
- * @copyright 2020
- */
-
 namespace core;
 
 class View{

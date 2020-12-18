@@ -5,11 +5,9 @@ namespace app\models;
 use PDO;
 
 class Stijl extends Model {
-
+    
     const TABLENAME = 'stijlen';
-
-    public function __construct()
-    {
+    public function __construct(){
         /**
          * Roep de parent-constructor aan met ��n optionele parameter:
          * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
@@ -19,14 +17,12 @@ class Stijl extends Model {
     }
 
     /** getters */
-    
-    public function getId()
-    {
+
+    public function getId(){
         return $this->getDataField('id');
     }
 
-    public function getNaam()
-    {
+    public function getNaam(){
         return $this->getDataField('naam');
     }
 

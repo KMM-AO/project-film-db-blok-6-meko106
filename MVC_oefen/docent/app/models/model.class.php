@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use \core\Database;
@@ -8,19 +7,15 @@ use PDO;
 abstract class Model {
     
     /** door alle child classes gedeelde properties */ 
-    
-    protected $pdo;         /** de databaseconnectie */
 
+    protected $pdo;         /** de databaseconnectie */
     private $data;          /** de associatieve array met record-gegevens van het object */
-    
     private $primary_name;  /** de naam van het primary-key-veld */
-    
     private $primary_type;  /** het pdo-param-type van het primary-key-veld */
     
     
     /** constructor */
-    public function __construct($primary_def = ['id', PDO::PARAM_INT])
-    {
+    public function __construct($primary_def = ['id', PDO::PARAM_INT]){
         $this->pdo = Database::getInstance()->getPdo();
         $this->setPrimaryName($primary_def[0]);
         $this->setPrimaryType($primary_def[1]);
@@ -28,13 +23,11 @@ abstract class Model {
     
     /** getters */
    
-    protected function getPrimaryName ()
-    {
+    protected function getPrimaryName (){
         return $this->primary_name;
     }
     
-    protected function getPrimaryType ()
-    {
+    protected function getPrimaryType (){
         return $this->primary_type;
     }
     
@@ -48,8 +41,7 @@ abstract class Model {
         return $this->data;    
     }
 
-    protected function getDataField($name)
-    {
+    protected function getDataField($name){
         return $this->data[$name] ?? NULL;
     }
     

@@ -8,6 +8,7 @@
 namespace app\controllers;
 
 class TestController extends Controller{
+
     public function test(){
         $this->view->setTemplate('test');
         $this->view->render();

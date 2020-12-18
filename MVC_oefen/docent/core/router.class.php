@@ -8,7 +8,7 @@ class Router{
     private $request;
     private $active_route;
     private $webroot;
-
+    
     private function __construct(){}
     private function __clone(){}
     
@@ -24,13 +24,13 @@ class Router{
         if (!isset($this->allowed_routes)){
             require '../config/routes.conf.php';
         }
-        return $this->allowed_routes;
+        return $this->allowed_routes;  // allowed_routes exists in the conf file.
         //it returns an array with Route objects containg 
-        // $requrl,method,$controllerclass,$controller_method
+        // $requrl,method,$controllerclas s,$controller_method
     }
     
     
-    private function getRequest(){
+    private function getRequest(){ // it returns $this->request
         if (!isset($this->request)){
             $this->request = new Request($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
         }
@@ -53,12 +53,12 @@ class Router{
 
     private function matchRequest(){
         $match = false; // match is standard false
-        foreach ($this->getAllowedRoutes() as $route){// each $route is an route object
+        foreach ($this->getAllowedRoutes() as $route){ // each $route is an route object
             if ($route->matches($this->getRequest()  ) ){ //if route object->matches(the done request)
                 //getReques returns an Request object
                 $this->active_route = $route;
                 $match = true;
-            }
+            } //dus foreach Route object
         }
         return $match; // active_route is the selected route object
     }
@@ -71,8 +71,9 @@ class Router{
             $view->render();
         }else{
             $this->active_route->deploy();
+            // $this->Route($request_uri, $request_method,
+            //$controller_class, $controller_method);
+            
         }
     }
-
-
 }

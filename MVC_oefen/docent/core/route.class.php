@@ -14,15 +14,15 @@ class Route{
         $this->request_url = $request_url;
         $this->request_method = $request_method;
         $this->controller_class = $controller_class;
-        $this->controller_method = $controller_method;
+        $this->controller_method = $controller_method; 
     }
 
 
-    public function matches(Request $request){  // Request obj
+    public function matches(Request $request){  // getRequest new Request ()
         return $this->methodMatches($request->getMethod() ) && $this->uriMatches($request->getUri());
     }
     
-    private function methodMatches($method){ // here we give the method name as parameter
+    private function methodMatches($method){ //request-> methof
         $ok = ($method == $this->request_method);// it returns true if the given method equals to requestmethod
         return $ok;
     }
@@ -34,12 +34,14 @@ class Route{
         } //$this.request_parameters=
         return $ok;
     }
-    
+
     public function deploy(){
         $class = '\\app\\controllers\\'.$this->controller_class;
         $controller = new $class();
         $callable = [$controller, $this->controller_method];
         call_user_func_array($callable, $this->request_parameters);
     }
+
+
     
 }
