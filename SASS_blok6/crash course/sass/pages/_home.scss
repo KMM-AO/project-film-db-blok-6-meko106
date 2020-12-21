@@ -1,0 +1,96 @@
+body{
+    background-color: $bg-color;
+    margin: 0;
+}
+
+.row-100{
+    height: 100vh;
+    background-image: url(/img/bg-1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display:flex;
+    align-items: flex-end;
+    .bg-overlay{
+        background-color: $bg-color;
+        height: 100vh;
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0.65;
+    }
+    .comp-1{
+        width: 874px;
+        position: relative;
+        z-index: 2;
+        padding: 0 140px 160px;
+    }
+    h1{
+        margin: 0;
+        font-family: $font-stack;
+        font-size: 64px;
+        font-weight: 500;
+        color: $light-color;
+        text-transform: uppercase;
+    }
+    .h-primary{
+        color: $primary-color;
+    }
+    p{
+        font-family: $font-text;
+        font-size: 24px;
+        color: $light-color;
+    }
+}
+
+.btn-menu{
+    width: 545px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+    .row-85{
+        height: 87.5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 4vh;
+        h2{
+            font-family: $font-stack;
+            font-size: 60px;
+            font-weight: 500;
+            color: $light-color;
+            padding-bottom: 2vh;
+        }
+        .student-menu{
+            display: flex;
+            justify-content: space-between;
+            width: 1080px;
+        }
+        .student{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .student-img{
+            width: 232px;
+            height: 232px;
+            border-radius: 100%;
+            object-fit: cover;
+            // width: 500px;
+        }
+        h3{
+            font-family: $font-stack;
+            font-size: 24px;
+            font-weight: 500;
+            color: $light-color;
+        }
+        #btn-student{
+            margin-top: 6vh;
+        }
+    }
+

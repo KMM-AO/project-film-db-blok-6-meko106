@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Roboto&display=swap");
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 70px;
+  min-width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  margin: 0;
+}
+
+header .logo a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 34px;
+  font-family: "Barlow", sans-serif;
+  padding-left: 140px;
+}
+
+header .logo a:hover {
+  color: #22F0D7;
+}
+
+header nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 547px;
+}
+
+header nav li {
+  list-style: none;
+}
+
+header nav a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 24px;
+  font-family: "Roboto", sans-serif;
+}
+
+header nav a:hover {
+  color: #22F0D7;
+}
+
+header .searchbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 380px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-right: 140px;
+}
+
+header .searchbar .header-searchbar {
+  width: 216px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  padding-left: 15px;
+}
+
+header .searchbar .header-search-btn {
+  width: 120px;
+  height: 40px;
+  border: solid #FFFFFF 2px;
+  border-radius: 5px;
+  background: none;
+  color: #FFFFFF;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+}
+
+header .searchbar .header-search-btn:hover {
+  background-color: #22F0D7;
+}
+
+body {
+  background-color: #011A4D;
+  margin: 0;
+}
+
+.row-100 {
+  height: 100vh;
+  background-image: url(/img/bg-1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.row-100 .bg-overlay {
+  background-color: #011A4D;
+  height: 100vh;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.65;
+}
+
+.row-100 .comp-1 {
+  width: 874px;
+  position: relative;
+  z-index: 2;
+  padding: 0 140px 160px;
+}
+
+.row-100 h1 {
+  margin: 0;
+  font-family: "Barlow", sans-serif;
+  font-size: 64px;
+  font-weight: 500;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.row-100 .h-primary {
+  color: #22F0D7;
+}
+
+.row-100 p {
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  color: #FFFFFF;
+}
+
+.btn-menu {
+  width: 545px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  z-index: 2;
+}
+
+.row-85 {
+  height: 87.5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 4vh;
+}
+
+.row-85 h2 {
+  font-family: "Barlow", sans-serif;
+  font-size: 60px;
+  font-weight: 500;
+  color: #FFFFFF;
+  padding-bottom: 2vh;
+}
+
+.row-85 .student-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 1080px;
+}
+
+.row-85 .student {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.row-85 .student-img {
+  width: 232px;
+  height: 232px;
+  border-radius: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.row-85 h3 {
+  font-family: "Barlow", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.row-85 #btn-student {
+  margin-top: 6vh;
+}
+
+.btn-primary, .btn-outline {
+  width: 250px;
+  height: 50px;
+  border-radius: 5pt;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background-color: #22F0D7;
+  color: #001021;
+}
+
+.btn-primary:hover {
+  background-color: #FFFFFF;
+}
+
+.btn-outline {
+  border: solid #FFFFFF 3px;
+  color: #FFFFFF;
+}
+
+.btn-outline:hover {
+  background-color: #FFFFFF;
+  color: #001021;
+}
+/*# sourceMappingURL=main.css.map */
