@@ -33,6 +33,20 @@ abstract class Model{
         $this->data[$name]=$value;
     }
 
+    protected function setError($name, $value){
+        $this->errors[$name] = $value;
+    }
+    
+    public function getErrors(){
+        return $this->errors ?? [];
+    }
+
+      
+    public function isValid(){
+        return count($this->getErrors()) == 0;
+    }
+    
+
     public function load(){
         $query='
         SELECT * FROM '.$this::TABLE_NAME. '

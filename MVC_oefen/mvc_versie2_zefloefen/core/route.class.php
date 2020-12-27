@@ -38,10 +38,14 @@ class Route{
     }
 
     public function deploy(){
-        $class = '\\app\\controllers\\'.$this->controller_class;
+        $class = '\\app\\controllers\\' . $this->controller_class;
+        
         $controller = new $class();
+        
         $callable = [$controller, $this->controller_method];
+        
         call_user_func_array($callable, $this->request_parameters);
+          
     }
 
 

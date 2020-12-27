@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use core\Model;
+use core\Token;
+use PDO;
+
 class User extends Model {
     const TABLE_NAME= 'users';
 
@@ -64,20 +68,19 @@ class User extends Model {
         $this->setId($this->pdo->lastInsertId() );
     }
 
-    private function loadByEmail(&$succes){
-        $query=
-        '
-        SELECT * 
-        FROM users
-        WHERE email= :email
-        ';
+    private function loadByEmail(&$success){
+        $query = '
+        SELECT *
+        FROM users 
+        WHERE email = :email
         
-        $stmt=$this->pdo->prepare($query);
-        $stmt->bindValue(':email' , $this->email, PDO::PARAM_STR);
-        $stmt->execute();
-        $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
-        $succes=($data != false);
-        if($succes){
+        ';
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $statement->execute();
+        $data = $statement->fetch(PDO::FETCH_ASSOC);
+        $success = ($data != false);
+        if ($success){
             $this->setData($data);
         }
     }

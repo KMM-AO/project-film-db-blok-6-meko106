@@ -16,8 +16,7 @@ use PDO;
  * Het PDO-object is daarom een property van de Database class.
  */
 
- class Database
-{
+ class Database{
     /**
      * static object van de class Database
      */

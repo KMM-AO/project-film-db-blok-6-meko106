@@ -9,37 +9,19 @@ namespace core;
 
 class View
 {
-    /** 
-     * De weer te geven template
-     * 
-     * uitgangspunten:
-     * - templatemap is ../templates (gezien vanuit public/index.php)
-     * - extensie van template-bestanden is .template.php 
-     */
+    
+    
     private $template;
     
-    /** 
-     * De associatieve array met variabelen, bedoeld voor de template.
-     * De array wordt uitgepakt in de render-method, zodat daar locale variabelen ontstaan 
-     * met de juiste namen (keys van $vars) en waarden (values van $vars). 
-     */
     private $vars;
     
-    /**
-     * De constructor
-     * - initialiseer de associatieve array met variabelen. 
-     */
-    public function __construct()
-    {
+ 
+    public function __construct(){
         $this->vars = [];
     }
+
     
-    /** 
-     * Instellen van de template
-     * - voeg pad en extensie toe 
-     */
-    public function setTemplate($value)
-    {
+    public function setTemplate($value){
         $this->template = '../templates/' . $value . '.template.php';
     }
     

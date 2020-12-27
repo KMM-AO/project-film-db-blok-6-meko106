@@ -6,11 +6,9 @@
  */
 
 namespace app\controllers;
-
 use app\models\User;
 
-class UserController extends Controller
-{
+class UserController extends Controller{
     
     /**
      * TEST-methods voor het nabootsen van api-requests. 
@@ -112,8 +110,7 @@ class UserController extends Controller
      * - bij mislukking: stop validatie-errors in de response
      * - bij succes: stop naam van de user en token in de response 
      */
-    public function login()
-    {
+    public function login(){
         $user = new User();
         
         $user->setEmail($_POST['email'] ?? '');
@@ -121,18 +118,14 @@ class UserController extends Controller
         
         $user->login();
         
-        if (!$user->isValid())
-        {
+        if (!$user->isValid()){
             $this->json->add('success', false);
             $this->json->add('errors', $user->getErrors());
-        }
-        else
-        {
+        }else{
             $this->json->add('success', true);
             $this->json->add('user_name', $user->name);
             $this->json->add('token', $user->getToken()->value);
         }
-        
         $this->json->render();
     }
 

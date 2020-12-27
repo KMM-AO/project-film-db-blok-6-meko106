@@ -15,8 +15,14 @@ class View{
         $this->template="../templates/".$template.'.template.php';
     }
 
+    public function add($key, $value)
+    {
+        $this->vars[$key] = $value;
+    }
+
 
     public function render(){
+        extract($this->vars);
         require $this->template;
     }    
 
