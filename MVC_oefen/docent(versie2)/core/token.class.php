@@ -13,10 +13,9 @@ class Token extends Model {
     /** relatie-properties */
     private $user;              // token heeft 1-op-1-relatie met user
     
-    public function __construct()
-    {
+    public function __construct(){
         /**
-         * Roep de parent-constructor aan met één optionele parameter:
+         * Roep de parent-constructor aan met ï¿½ï¿½n optionele parameter:
          * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
          *   default is ['id', PDO::PARAM_INT]
          */
@@ -30,32 +29,25 @@ class Token extends Model {
         $this->setDataField('value', $value);
     }
     
-    public function setIdUser($value)
-    {
+    public function setIdUser($value){
         $this->setDataField('id_user', $value);
     }
 
     /** 
      * relaties (relaties zijn lazy loaded)
      */    
-    public function getUser()
-    {
-        if (!isset($this->user))
-        {        
+    public function getUser(){
+        if (!isset($this->user)){        
             $this->user = new User();
-
             $this->user->setId($this->id_user);
-
             $this->user->load($success);
-            
         }
         return $this->user;
     }
 
     /** niet-generieke database-acties */
     
-    private function save()
-    {
+    private function save(){
         $query =
         '
             INSERT INTO tokens (value, id_user)
@@ -67,8 +59,7 @@ class Token extends Model {
         $statement->execute();
     }
 
-    public function loadByUser(&$success)
-    {
+    public function loadByUser(&$success){
         $query = 
         '
             SELECT *
@@ -88,14 +79,12 @@ class Token extends Model {
     
     /** acties bij REGISTRATIE en LOGIN */
     
-    public function generate()
-    {
+    public function generate(){
         $this->setValue(uniqid());
         $this->save();
     }
     
-    public function regenerate()
-    {
+    public function regenerate(){
         $this->delete($success);
         $this->generate();
     }
@@ -108,24 +97,18 @@ class Token extends Model {
      * domein dan de API-backend, is er hier gekozen voor POST.
      */
     
-    public function authenticated()
-    {
+    public function authenticated(){
         $this->setValue($_POST['token'] ?? '');
         
-        if ($this->value == '')
-        {
+        if ($this->value == ''){
             $this->setError('token', 'token ontbreekt');
-        } 
-        else
-        {
+        }else{
             $this->load($ok);
             
-            if (!$ok)
-            {
+            if (!$ok){
                 $this->setError('token', 'token is ongeldig');
             }
         }
-        
         return $this->isValid();
     }
  

@@ -15,13 +15,7 @@ class Product extends Model {
     private $brouwer;   // de 1-op-veel-relatie met brouwers, object van de class Brouwer
     private $smaken;    // de veel-op-veel-relatie met smaken, array van objecten van de class Smaak
     
-    public function __construct()
-    {
-        /**
-         * Roep de parent-constructor aan met één optionele parameter:
-         * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
-         *   default is ['id', PDO::PARAM_INT]
-         */
+    public function __construct(){
         parent::__construct();
     }
     
@@ -95,7 +89,7 @@ class Product extends Model {
             FROM product_smaak
             WHERE id_product = :id_product
         ';
-        /** ... of alleen één relatie met een bepaalde smaak. */
+        /** ... of alleen ï¿½ï¿½n relatie met een bepaalde smaak. */
         if (isset ($smaak))
         {
             $query .= ' AND id_smaak = :id_smaak';

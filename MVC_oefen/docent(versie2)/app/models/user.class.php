@@ -18,10 +18,9 @@ class User extends Model {
     private $password;
     private $password_repeat;
     
-    public function __construct()
-    {
+    public function __construct(){
         /**
-         * Roep de parent-constructor aan met één optionele parameter:
+         * Roep de parent-constructor aan met ï¿½ï¿½n optionele parameter:
          * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
          *   default is ['id', PDO::PARAM_INT]
          */
@@ -30,33 +29,27 @@ class User extends Model {
     
     /** setters */
     
-    public function setId($value)
-    {
+    public function setId($value){
         $this->setDataField('id', $value);
     }
     
-    public function setEmail($value)
-    {
+    public function setEmail($value){
         $this->setDataField('email', $value);
     }
     
-    public function setName($value)
-    {
+    public function setName($value){
         $this->setDataField('name', $value);
     }
     
-    public function setPasswordHash($value)
-    {
+    public function setPasswordHash($value){
         $this->setDataField('password_hash', $value);
     }
     
-    public function setPassword($value)
-    {
+    public function setPassword($value){
         $this->password = $value;
     }
     
-    public function setPasswordRepeat($value)
-    {
+    public function setPasswordRepeat($value){
         $this->password_repeat = $value;
     }
 
@@ -72,17 +65,12 @@ class User extends Model {
      *  
     */
     
-    public function getToken()
-    {
-        if (!isset($this->token))
-        {
-        
+    public function getToken(){
+        if (!isset($this->token)){
+
             $this->token = new Token();
-
             $this->token->setIdUser($this->id);
-
             $this->token->loadByUser($success);
-
         }
         return $this->token;
     }
@@ -90,8 +78,7 @@ class User extends Model {
 
     /** database-acties */
 
-    private function save()
-    {
+    private function save(){
         $query =
         '
             INSERT INTO users (name, email, password_hash)
@@ -107,21 +94,19 @@ class User extends Model {
         $this->setId($this->pdo->lastInsertId());
     }
 
-    private function loadByEmail(&$success)
-    {
-        $query = 
-        '
-            SELECT *
-            FROM users 
-            WHERE email = :email
+    private function loadByEmail(&$success){
+        $query = '
+        SELECT *
+        FROM users 
+        WHERE email = :email
+        
         ';
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':email', $this->email, PDO::PARAM_STR);
         $statement->execute();
         $data = $statement->fetch(PDO::FETCH_ASSOC);
         $success = ($data != false);
-        if ($success)
-        {
+        if ($success){
             $this->setData($data);
         }
     }
@@ -130,39 +115,30 @@ class User extends Model {
      * LOGIN
      */
 
-    public function login()
-    {
+    public function login(){
         $this->loadByEmail($success);
         
-        if (!$success)
-        {
+        if (!$success){
             $this->setError('email', 'e-mailadres is niet geregistreerd');
-        }
-        elseif (!password_verify($this->password, $this->password_hash))
-        {
-            $this->setError('password', 'wachtwoord is onjuist');   
+        }elseif (!password_verify($this->password, $this->password_hash)){
+            $this->setError('password', 'wachtwoord is onjuist');
         }
                 
-        if ($this->isValid())
-        {
+        if ($this->isValid()){
             $this->getToken()->regenerate();
         }
     }
 
     /** REGISTRATIE */
     
-    public function register()
-    {
+    public function register(){
         $this->validateName();
         $this->validateEmail();
         $this->validatePassword();
         
-        if ($this->isValid())
-        {
+        if ($this->isValid()){
             $this->setPasswordHash(password_hash($this->password, PASSWORD_DEFAULT));
-            
             $this->save();
-            
             /**
              * onderstaande code alleen gebruiken 
              * als je wil dat de user meteen ingelogd is na registratie
@@ -172,50 +148,35 @@ class User extends Model {
     }
     
     /** name mag niet leeg zijn */
-    private function validateName()
-    {
-        if ($this->name == '')
-        {
+    private function validateName(){
+        if ($this->name == ''){
             $this->setError('name', 'naam is leeg');
         }    
     }
 
     /** email moet voldoen aan de eisen voor een e-mailadres, en mag niet al geregistreerd zijn */
-    private function validateEmail()
-    {
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL))
-        {
+    private function validateEmail(){
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
             $this->setError('email', 'e-mailadres is ongeldig');
-        }
-        else
-        {
+        }else{
             $user = new User();
             $user->setEmail($this->email);
             $user->loadByEmail($success);
-            if ($success)
-            {
+            if ($success){
                 $this->setError('email', 'e-mailadres is al geregistreerd');
             }
         }
     }
     
     /** password moet bestaan uit tenminste 6 tekens, waarvan tenminste 1 hoofdletter en tenminste 1 cijfer */
-    private function validatePassword()
-    {
-        if (strlen($this->password) < 6)
-        {
+    private function validatePassword(){
+        if (strlen($this->password) < 6){
             $this->setError('password', 'wachtwoord bevat minder dan 6 tekens');
-        }
-        elseif (!preg_match('/[A-Z]/', $this->password))
-        {
+        }elseif (!preg_match('/[A-Z]/', $this->password)){
             $this->setError('password', 'wachtwoord bevat geen hoofdletter');
-        }
-        elseif (!preg_match('/[0-9]/', $this->password))
-        {
+        }elseif (!preg_match('/[0-9]/', $this->password)){
             $this->setError('password', 'wachtwoord bevat geen cijfer');
-        }
-        elseif ($this->password != $this->password_repeat)
-        {
+        }elseif ($this->password != $this->password_repeat){
             $this->setError('password_repeat', 'herhaalde wachtwoord is ongelijk aan eerste wachtwoord');
         }
     }

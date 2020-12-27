@@ -20,19 +20,9 @@ abstract class Model {
     private $primary_type;  /** het pdo-param-type van het primary-key-veld */
     
     private $errors;        /** de associatieve array met validatie-errors */
-    
-    
-    /** 
-     * De constructor
-     * - kan worden aangeroepen door de child constructor
-     * - de parameter bevat de definitie van de primary key, nodig voor generieke database-methods
-     *   default: primary key is een integer met de naam id
-     * - initialiseer de pdo-property
-     * - initialiseer de primary name (default id)
-     * - initialiseer de primary type (default PARAM_INT)
-     */
-    public function __construct($primary_def = ['id', PDO::PARAM_INT])
-    {
+
+
+    public function __construct($primary_def = ['id', PDO::PARAM_INT]){
         $this->pdo = Database::getInstance()->getPdo();
         
         $this->primary_name = $primary_def[0];
@@ -82,8 +72,7 @@ abstract class Model {
     }
     
     /** setter voor data (specifiek veld) */
-    protected function setDataField($name, $value)
-    {
+    protected function setDataField($name, $value){
         $this->data[$name] = $value;
     }
     
@@ -159,11 +148,11 @@ abstract class Model {
      * 
      * Deze method retourneert een array met alle objecten van de aanvragende child class.
      */
-    static public function index() 
-    {
+    static public function index(){
+
         $pdo = Database::getInstance()->getPdo();           /** database-connectie */
-        
-        $class = get_called_class();                        /** één van de child classes */
+        $class = get_called_class();                        /** ï¿½ï¿½n van de child classes */
+
 
         $query =                                            /** haal alle records op */
         '
@@ -183,7 +172,7 @@ abstract class Model {
             $object->setData($record);                      /** stop data erin */
             $objects[] = $object;                           /** voeg toe aan return-array */
         }
-        
+
         return $objects;
     }
     

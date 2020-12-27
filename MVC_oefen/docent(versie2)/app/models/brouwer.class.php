@@ -13,7 +13,7 @@ class Brouwer extends Model {
     public function __construct()
     {
         /**
-         * Roep de parent-constructor aan met één optionele parameter:
+         * Roep de parent-constructor aan met ï¿½ï¿½n optionele parameter:
          * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
          *   default is ['id', PDO::PARAM_INT]
          */
@@ -22,8 +22,7 @@ class Brouwer extends Model {
 
     /** setter voor de id */
     
-    public function setId($value)
-    {
+    public function setId($value){
         $this->setDataField('id', $value);
     }
 
