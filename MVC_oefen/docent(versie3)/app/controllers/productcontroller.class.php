@@ -10,40 +10,56 @@ namespace app\controllers;
 use app\models\Product;
 use app\models\Rating;
 
-class ProductController extends Controller{
-
+class ProductController extends Controller
+{
     
-    public function index(){
+    /**
+     * Voorbeelden van de afhandeling van web-requests naar html-responses
+     * 
+     * Bij web-requests worden de producten als model-objecten beschikbaar gesteld
+     * aan de View (en dus de template). 
+     * Dat betekent dat je in de template nog gerelateerde gegevens kunt ophalen, zoals
+     * de stijl, de brouwer en de smaken. 
+     * 
+     * Bij api-requests (zie onder) werkt dat anders.
+     */
+    
+    public function index()
+    {
         $this->view->setTemplate('product_index');
         $this->view->add('producten', Product::index());
         $this->view->render();
     }
-
-
-
-
-
-
     
-    public function show($id){
+    public function show($id)
+    {
         $product = new Product();
         $product->setId($id);
         $product->load($success);
-        if (!$success){
+        if (!$success)
+        {
             $this->view->setTemplate('404');
-        }else{
+        }
+        else
+        {
             $this->view->setTemplate('product_show');
             $this->view->add('product', $product);    
         }
         $this->view->render();
     }
     
-    public function rate($id){
-        if (!$this->token->isValid()){
+    public function rate($id)
+    {
+        if (!$this->token->isValid())
+        {
             $this->session->add('message', 'je bent niet ingelogd...');
-        }else{
+        }
+        else
+        {
             $rating = $this->token->getUser()->getRatingByProduct($id);
-            if (!isset($rating)){
+            
+            if (!isset($rating))
+            {
                 $rating = new Rating();
                 $rating->setIdUser($this->token->getUser()->id);
                 $rating->setIdProduct($id);
@@ -53,9 +69,12 @@ class ProductController extends Controller{
             
             $rating->save();
             
-            if (!$rating->isValid()){
+            if (!$rating->isValid())
+            {
                 $this->session->add('message', join('; ', $rating->getErrors()));
-            }else{
+            }
+            else
+            {
                 $this->session->add('message', 'dank voor je rating...');
             }
             
@@ -74,7 +93,7 @@ class ProductController extends Controller{
      * 
      * Een alternatief is dat je je data vanuit de client ophaalt in stappen: bijvoorbeeld 
      * eerst de productgegevens en daarna voor elk product de benodigde gerelateerde gegevens,
-     * maar dat is niet erg efficiï¿½nt
+     * maar dat is niet erg efficiënt
      */
     
     public function index_json()

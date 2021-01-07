@@ -1,0 +1,14 @@
+Aanpassingen in deze versie (2)
+
+- bugfix: use core\Database in \app\models\Smaak
+
+- 404-response in \core\Router::go
+- 404-response in \app\controllers\ProductController::show
+- json-methods uit models verwijderd (was daar niet logisch)
+- json class (vergelijkbaar met view class)
+- json-voorbeelden in \app\controllers\ProductController (en de route-configuratie)
+
+- \app\models\Model verplaatst naar \core\Model
+- generieke load-method (SELECT record op grond van primary key)
+
+- users en tokens 

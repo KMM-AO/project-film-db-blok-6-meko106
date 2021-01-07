@@ -163,7 +163,7 @@ abstract class Model {
     {
         $pdo = Database::getInstance()->getPdo();           /** database-connectie */
         
-        $class = get_called_class();                        /** ï¿½ï¿½n van de child classes */
+        $class = get_called_class();                        /** één van de child classes */
 
         $query =                                            /** haal alle records op */
         '

@@ -1,6 +1,14 @@
 <?php
 
-$this->allowed_routes = [
+/**
+ * @author Jeroen van den Brink
+ * @copyright 2020
+ * 
+ * configuratiefile voor de toegestane routes
+ */
+
+$this->allowed_routes = 
+[
 
     /** testroutes */
 

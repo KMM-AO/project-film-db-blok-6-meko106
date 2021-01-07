@@ -1,6 +1,6 @@
 <nav>
     <div>
-        <?php if (isset($_authuser)) :  //????? ?> 
+        <?php if (isset($_authuser)) : ?>
             Ingelogd als <?= $_authuser->name ?>
         <?php else : ?>
             Niet ingelogd

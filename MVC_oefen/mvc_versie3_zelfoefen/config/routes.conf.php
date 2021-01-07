@@ -20,8 +20,8 @@ $this->allowed_routes = [
 
     /** webrequests voor producten */ 
    
-    new \core\Route(
-        'product/index',
+    new \core\Route( //uri= product/index
+        'product/index', 
         'GET',
         'ProductController',
         'index'
