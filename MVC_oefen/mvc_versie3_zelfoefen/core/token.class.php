@@ -24,37 +24,29 @@ class Token extends Model {
     
     /** setters */
     
-    public function setValue($value)
-    {
+    public function setValue($value){
         $this->setDataField('value', $value);
     }
     
-    public function setIdUser($value)
-    {
+    public function setIdUser($value){
         $this->setDataField('id_user', $value);
     }
 
     /** 
      * relaties (relaties zijn lazy loaded)
      */    
-    public function getUser()
-    {
-        if (!isset($this->user))
-        {        
+    public function getUser(){
+        if (!isset($this->user)){        
             $this->user = new User();
-
             $this->user->setId($this->id_user);
-
             $this->user->load($success);
-            
         }
         return $this->user;
     }
 
     /** niet-generieke database-acties */
     
-    private function save()
-    {
+    private function save(){
         $query =
         '
             INSERT INTO tokens (value, id_user)
@@ -66,8 +58,7 @@ class Token extends Model {
         $statement->execute();
     }
 
-    public function loadByUser(&$success)
-    {
+    public function loadByUser(&$success){
         $query = 
         '
             SELECT *
@@ -79,22 +70,19 @@ class Token extends Model {
         $statement->execute();
         $data = $statement->fetch(PDO::FETCH_ASSOC);
         $success = ($data != false);
-        if ($success)
-        {
+        if ($success){
             $this->setData($data);
         }
     }
     
     /** acties bij REGISTRATIE en LOGIN */
     
-    public function generate()
-    {
+    public function generate(){
         $this->setValue(uniqid());
         $this->save();
     }
     
-    public function regenerate()
-    {
+    public function regenerate(){
         $this->delete($success);
         $this->generate();
     }
@@ -109,14 +97,12 @@ class Token extends Model {
      * Web-authenticatie gaat via de sessie.
      */
     
-    public function authenticate()
-    {
+    public function authenticate(){
         $session = Session::getInstance();
 
         $this->setValue($_POST['token'] ?? $session->get('token') ?? '');
         
-        if ($this->value == '')
-        {
+        if ($this->value == ''){
             $this->setError('token', 'token ontbreekt');
         } 
         else

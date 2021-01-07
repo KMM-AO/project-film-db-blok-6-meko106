@@ -7,8 +7,7 @@
 
 namespace core;
 
-class View
-{
+class View{
     /** 
      * De weer te geven template
      * 
@@ -29,15 +28,13 @@ class View
      * De constructor
      * - initialiseer de associatieve array met variabelen. 
      */
-    public function __construct(){
+    public function __construct(){ //when making a new object, a vars empty array is also made
         $this->vars = [];
         $this->add('_webroot', Router::getInstance()->getWebroot());
+        //add() adds an key and value to the vars array 
     }
-    
-    /** 
-     * Instellen van de template
-     * - voeg pad en extensie toe 
-     */
+
+
     public function setTemplate($value){
         $this->template = '../templates/' . $value . '.template.php';
     }
@@ -60,3 +57,5 @@ class View
         require $this->template;
     }
 }
+
+

@@ -34,8 +34,8 @@ abstract class Model {
     public function __construct($primary_def = ['id', PDO::PARAM_INT])
     {
         $this->pdo = Database::getInstance()->getPdo();
-        
-        $this->primary_name = $primary_def[0];
+
+        $this->primary_name = $primary_def[0]; 
         $this->primary_type = $primary_def[1];
     }
    
@@ -52,9 +52,9 @@ abstract class Model {
     }
     
     /** getter voor de waarde van de primary key (generiek) */
-    protected function getPrimaryValue()
-    {
+    protected function getPrimaryValue(){
         return $this->getDataField($this->primary_name);
+        //return the id (the primare_name is id)
     }
     
     /** 
@@ -66,24 +66,20 @@ abstract class Model {
      * Je mag het gebruiken; het scheelt een hoop getters (en setters), en het komt de
      * leesbaarheid van je request-scripts ten goede. Maar wees er voorzichtig mee.
      */
-    public function __get($name)
-    {
+    public function __get($name){
         return $this->getDataField($name);
     }
     
     /** setter voor alle data (heel record) in 1x */
-    protected function setData($value)
-    {
-        foreach ($value as &$str)
-        {
+    protected function setData($value){
+        foreach ($value as &$str){
             $str = utf8_encode($str);
         }
         $this->data = $value;
     }
     
     /** setter voor data (specifiek veld) */
-    protected function setDataField($name, $value)
-    {
+    protected function setDataField($name, $value){
         $this->data[$name] = $value;
     }
     
@@ -93,8 +89,7 @@ abstract class Model {
      * - een method om de errors op te halen
      * - eem method om te checken of er errors zijn 
      */
-    protected function setError($name, $value)
-    {
+    protected function setError($name, $value){
         $this->errors[$name] = $value;
     }
     
@@ -128,8 +123,7 @@ abstract class Model {
     }
     
     /** ophalen van een database-record op grond van de primary key */
-    public function load(&$success)
-    {
+    public function load(&$success){
         $query = 
         '
             SELECT *
@@ -137,12 +131,11 @@ abstract class Model {
             WHERE ' . $this->primary_name . ' = :pk
         ';
         $statement = $this->pdo->prepare($query);
-        $statement->bindValue(':pk', $this->getPrimaryValue(), $this->primary_type);
+        $statement->bindValue(':pk', $this->getPrimaryValue(), $this->primary_type);//So here it is PARAM_INT
         $statement->execute();
         $data = $statement->fetch(PDO::FETCH_ASSOC);
         $success = ($data != false);
-        if ($success)
-        {
+        if ($success){
             $this->setData($data);
         }
     }
@@ -159,32 +152,25 @@ abstract class Model {
      * 
      * Deze method retourneert een array met alle objecten van de aanvragende child class.
      */
-    static public function index() 
-    {
+    static public function index(){
         $pdo = Database::getInstance()->getPdo();           /** database-connectie */
-        
         $class = get_called_class();                        /** ��n van de child classes */
-
         $query =                                            /** haal alle records op */
         '
             SELECT *
-            FROM ' . $class::TABLENAME . '
-        ';
-        
+            FROM ' . $class::TABLENAME . ' 
+        '; //you select an TABLENAME  op basis van de class_name
         $statement = $pdo->prepare($query);                 /** query uitvoeren */
         $statement->execute();
 
         $records = $statement->fetchAll(PDO::FETCH_ASSOC);  /** records ophalen als assoc. arrays */
         $objects = [];                                      /** records moeten model-objects worden */
 
-        foreach ($records as $record)
-        {
+        foreach ($records as $record){
             $object = new $class();                         /** maak object van child class */
             $object->setData($record);                      /** stop data erin */
             $objects[] = $object;                           /** voeg toe aan return-array */
-        }
-        
+        }   
         return $objects;
     }
-    
 }

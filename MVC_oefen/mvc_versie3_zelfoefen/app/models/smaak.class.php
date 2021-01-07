@@ -14,7 +14,7 @@ class Smaak extends Model {
     public function __construct()
     {
         /**
-         * Roep de parent-constructor aan met één optionele parameter:
+         * Roep de parent-constructor aan met ï¿½ï¿½n optionele parameter:
          * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
          *   default is ['id', PDO::PARAM_INT]
          */
@@ -23,17 +23,15 @@ class Smaak extends Model {
 
     /** setter voor de id */
     
-    public function setId($value)
-    {
+    public function setId($value){
         $this->setDataField('id', $value);
     }
 
     /** static methods */
     
-    static public function indexByProduct($id_product) 
-    {
+    static public function indexByProduct($id_product) {
         $pdo = Database::getInstance()->getPdo();
-        
+
         $query = 
         '
             SELECT smaken.*
@@ -45,12 +43,11 @@ class Smaak extends Model {
         $statement = $pdo->prepare($query);
         $statement->bindValue(':id_product', $id_product, PDO::PARAM_INT);
         $statement->execute();
-        
+
         $records = $statement->fetchAll(PDO::FETCH_ASSOC);
         $objects = [];
         
-        foreach ($records as $record)
-        {
+        foreach ($records as $record){
             $object = new self();
             $object->setData($record);
             $objects[] = $object;

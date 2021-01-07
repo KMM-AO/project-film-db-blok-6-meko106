@@ -12,8 +12,7 @@ use \core\Json;
 use \core\Token;
 use \core\Session;
 
-abstract class Controller
-{
+abstract class Controller{
     /**
      * Het view object, wordt alleen gebruikt voor html-responses. 
      */
@@ -39,21 +38,19 @@ abstract class Controller
      * De constructor.
      * Initialiseert alle properties.
      */
-    public function __construct()
-    {
+    public function __construct(){
         $this->session = Session::getInstance();
 
         $this->json = new Json();
 
         $this->token = new Token();        
         $this->token->authenticate();
-
+        
         $this->view = new View();
         
         $this->view->add('_message', $this->session->getOnce('message'));
         
-        if ($this->token->isValid()) 
-        {
+        if ($this->token->isValid()) {
             $this->view->add('_authuser', $this->token->getUser());
         }
     }
@@ -61,8 +58,7 @@ abstract class Controller
     /**
      * method voor interne (= binnen de applicatie) redirects
      */
-    protected function redirect($url)
-    {
+    protected function redirect($url){
         $webroot = \core\Router::getInstance()->getWebroot();        
         
         header('location: ' . $webroot . $url);

@@ -11,10 +11,10 @@ class Product extends Model {
     const TABLENAME = 'producten';
 
     /** relatie-properties */
+    /** RELATIONS */
     private $stijl;     // de 1-op-veel-relatie met stijlen, object van de class Stijl
     private $brouwer;   // de 1-op-veel-relatie met brouwers, object van de class Brouwer
     private $smaken;    // de veel-op-veel-relatie met smaken, array van objecten van de class Smaak
-    
     public function __construct(){
         /**
          * Roep de parent-constructor aan met ��n optionele parameter:
@@ -22,6 +22,7 @@ class Product extends Model {
          *   default is ['id', PDO::PARAM_INT]
          */
         parent::__construct();
+        // it is an child of the Model class
     }
     
     /** setter voor de id */

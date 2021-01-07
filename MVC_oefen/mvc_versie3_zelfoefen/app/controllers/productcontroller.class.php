@@ -12,19 +12,19 @@ use app\models\Rating;
 
 class ProductController extends Controller{
 
-    
+
+
     public function index(){
         $this->view->setTemplate('product_index');
+        //seTemplate it sets the $value to the
         $this->view->add('producten', Product::index());
+        // the key product and Product::index as values
         $this->view->render();
+        //render extract the variables in vars array
+        //and calls the given template
     }
 
 
-
-
-
-
-    
     public function show($id){
         $product = new Product();
         $product->setId($id);
@@ -50,17 +50,14 @@ class ProductController extends Controller{
             }
             
             $rating->setValue($_POST['value'] ?? null);
-            
+
             $rating->save();
-            
             if (!$rating->isValid()){
                 $this->session->add('message', join('; ', $rating->getErrors()));
             }else{
                 $this->session->add('message', 'dank voor je rating...');
             }
-            
             $this->redirect('product/show/' . $id);
-            
         }
     }
     
@@ -77,29 +74,23 @@ class ProductController extends Controller{
      * maar dat is niet erg effici�nt
      */
     
-    public function index_json()
-    {
+    public function index_json(){
         $products = Product::index();
         $data = [];
-        foreach ($products as $product)
-        {
+        foreach ($products as $product){
             $data[] = $product->GetData();
         }
         $this->json->add('producten', $data);
         $this->json->render();
     }
     
-    public function show_json($id)
-    {
+    public function show_json($id){
         $product = new Product();
         $product->setId($id);
         $product->load($success);
-        if (!$success)
-        {
+        if (!$success){
             $this->json->setStatus(404, 'Not Found');
-        }
-        else
-        {
+        }else{
             $data = $product->getData();
             $data['stijl'] = $product->getStijl()->GetData();
             $data['brouwer'] = $product->getBrouwer()->GetData();

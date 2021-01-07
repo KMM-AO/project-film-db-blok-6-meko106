@@ -44,7 +44,7 @@ class Router{
      * getter voor het singleton object van de class Router
      */
     public static function getInstance(){ //returns as self object (from the same class)
-        if (!isset(self::$instance)){
+        if (!isset(self::$instance)){  
             self::$instance = new self();
         }
         return self::$instance;
