@@ -1,14 +1,10 @@
 <?php
 
-/**
- * @author Jeroen van den Brink
- * @copyright 2020
- */
+
 
 namespace core;
 
-class Router
-{
+class Router{
     /**
      * static object van de class Router
      */
@@ -37,25 +33,18 @@ class Router
     /**
      * private constructor blokkeert het gebruik van new om Router-objecten te maken
      */
-    private function __construct()
-    {  
+    private function __construct(){  // private blokkeert het maken van router classs objecten
     }
     
-    /**
-     * private clone-method
-     */
-    private function __clone()
-    {
+    private function __clone(){
         // gebruiken we niet
     }
     
     /**
      * getter voor het singleton object van de class Router
      */
-    public static function getInstance()
-    {
-        if (!isset(self::$instance))
-        {
+    public static function getInstance(){ //returns as self object (from the same class)
+        if (!isset(self::$instance)){
             self::$instance = new self();
         }
         return self::$instance;
@@ -63,28 +52,22 @@ class Router
     
     /** GETTERS */
     
-    private function getAllowedRoutes()
-    {
-        if (!isset($this->allowed_routes))
-        {
+    private function getAllowedRoutes(){
+        if (!isset($this->allowed_routes)){
             require '../config/routes.conf.php';
         }
         return $this->allowed_routes;
     }
     
-    private function getRequest()
-    {
-        if (!isset($this->request))
-        {
+    private function getRequest(){
+        if (!isset($this->request)){
             $this->request = new Request($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
         }
         return $this->request;
     }
 
-    public function getWebroot()
-    {
-        if (!isset($this->webroot))
-        {
+    public function getWebroot(){
+        if (!isset($this->webroot)){
             /**
              * $_SERVER['SCRIPT_NAME'] is normaliter: /pad/naar/de/webroot/index.php, 
              * maar in principe is een andere filename dan index.php ook toegestaan. 
@@ -113,12 +96,9 @@ class Router
      * 
      * Let op: deze method vindt de EERSTE route die overeenkomt met de request
      */
-    private function matchRequest()
-    {
-        foreach ($this->getAllowedRoutes() as $route)
-        {
-            if ($route->matches($this->getRequest()))
-            {
+    private function matchRequest(){
+        foreach ($this->getAllowedRoutes() as $route){
+            if ($route->matches($this->getRequest())){
                 $this->active_route = $route;           // onthoud gevonden route
                 return true;                            // stop met zoeken
             }
@@ -129,19 +109,14 @@ class Router
     /**
      * voert de requestafhandeling uit
      */
-    public function go()
-    {
-        if (!$this->matchRequest())
-        {
+    public function go(){
+        if (!$this->matchRequest()){
             header("HTTP/1.0 404 Not Found");
             $view = new View();
-            $view->setTemplate('404');
-            $view->render();
-        }
-        else
-        {
+            $view->setTemplate('404');//$tgis->template= ../tempalates/404.template.php
+            $view->render();// require $this->template
+        }else{
             $this->active_route->deploy();
         }
     }
-    
 }

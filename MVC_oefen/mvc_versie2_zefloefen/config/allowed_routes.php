@@ -52,11 +52,11 @@ $this->allowed_routes=[
         'register_form'
     ),
     
-    new \core\Route(
+    new \core\Route( 
         'user/login',
         'GET',
         'UserController',
-        'login_form'
+        'login_form' 
     ),
     
     new \core\Route(
@@ -66,7 +66,6 @@ $this->allowed_routes=[
         'authenticate_form'
     ),
 
-    
     new \core\Route(
         'user/logout',
         'GET',

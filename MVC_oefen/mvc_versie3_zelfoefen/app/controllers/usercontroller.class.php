@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @author Jeroen van den Brink
- * @copyright 2020
- */
 
 namespace app\controllers;
 
@@ -153,8 +149,7 @@ class UserController extends Controller
      * - bij mislukking/succes (web): redirect met sessiedata
      */
 
-    public function login()
-    {
+    public function login(){
         $user = new User();
         
         $user->setEmail($_POST['email'] ?? '');
@@ -163,15 +158,13 @@ class UserController extends Controller
         $user->login();
         
         if (!$user->isValid())
-        {
+    {
             $this->session->add('message', 'Inloggegevens zijn niet correct...');
             $this->session->add('errors', $user->getErrors());
             $this->session->add('post', array_diff_key($_POST, ['password' => '']));
             
-            $this->redirect('user/login');
-        }
-        else
-        {
+            $this->redirect('user/login');}
+        else{
             $this->session->add('message', 'Je bent ingelogd...');
             $this->session->add('token', $user->getToken()->value);
 
@@ -228,14 +221,10 @@ class UserController extends Controller
      * Deze request is alleen zinvol als de user is geauthenticeerd (ingelogd)
      */
 
-    public function logout()
-    {        
-        if (!$this->token->isValid())
-        {
+    public function logout(){        
+        if (!$this->token->isValid()){
             $this->session->add('message', 'Je was niet (meer) ingelogd...');
-        }
-        else
-        {         
+        }else{         
             $this->token->delete($success);
 
             $this->session->add('message', 'Je bent uitgelogd...');

@@ -7,12 +7,10 @@
  * initialisatiescript
  */
 
-function requireClass($class_name)
-{
+function requireClass($class_name){
     $class_name = str_replace('\\', '/', $class_name);
     $class_file = '../' . strtolower($class_name) . '.class.php';
-    if (!file_exists($class_file))
-    {
+    if (!file_exists($class_file)){
         throw new Exception('Kan classfile ' . $class_file . ' niet openen.');
     }
     require $class_file;
@@ -20,8 +18,7 @@ function requireClass($class_name)
 
 spl_autoload_register('requireClass');
 
-function myVarDump($var)
-{
+function myVarDump($var){
     echo '<pre>';
     var_dump($var);
     echo '</pre>';

@@ -21,7 +21,7 @@ abstract class Model {
     
     private $errors;        /** de associatieve array met validatie-errors */
 
-
+    
     public function __construct($primary_def = ['id', PDO::PARAM_INT]){
         $this->pdo = Database::getInstance()->getPdo();
         
@@ -41,21 +41,11 @@ abstract class Model {
         return $this->data[$name] ?? NULL;
     }
     
-    /** getter voor de waarde van de primary key (generiek) */
     protected function getPrimaryValue()
     {
         return $this->getDataField($this->primary_name);
     }
-    
-    /** 
-     * magic getter
-     * 
-     * De magic getter (en setter) komt in actie wanneer je een property probeert te benaderen
-     * die niet bestaat, of die niet beschikbaar is (bijv. omdat hij private is).
-     * 
-     * Je mag het gebruiken; het scheelt een hoop getters (en setters), en het komt de
-     * leesbaarheid van je request-scripts ten goede. Maar wees er voorzichtig mee.
-     */
+
     public function __get($name)
     {
         return $this->getDataField($name);

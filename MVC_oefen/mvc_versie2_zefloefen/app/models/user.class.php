@@ -9,6 +9,7 @@ use PDO;
 class User extends Model {
     const TABLE_NAME= 'users';
 
+
     private $token;
 
     private $password;
@@ -73,13 +74,12 @@ class User extends Model {
         SELECT *
         FROM users 
         WHERE email = :email
-        
         ';
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':email', $this->email, PDO::PARAM_STR);
         $statement->execute();
         $data = $statement->fetch(PDO::FETCH_ASSOC);
-        $success = ($data != false);
+        $success = ($data != false); 
         if ($success){
             $this->setData($data);
         }
@@ -93,7 +93,7 @@ class User extends Model {
         }elseif (!password_verify($this->password, $this->password_hash)){
             $this->setError('password', 'wachtwoord is onjuist');
         }
-        
+
         if($this->isValid()){
             $this->getToken() -> regenerate();
         }
@@ -106,7 +106,6 @@ class User extends Model {
         $this->validateName();
         $this->validateEmail();
         $this->validatePassword();
-        
         if($this->isValid() ){
             $this->setPasswordHash(password_hash($this->password, PASSWORD_DEFAULT));
             $this->save();
@@ -117,7 +116,7 @@ class User extends Model {
 
     private function validateEmail(){
         if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
-            $this->setError('email', 'emailadres is ongeldig');
+            $this->setError('email', 'emailadres is ongeldig'); //setError[$name]=$v
         }else{
             $user=new User();
             $user->setEmail($this->email);
@@ -126,6 +125,12 @@ class User extends Model {
                 $this->setError('email', 'emailadres is al geregistreerd');
             }
         }
+    }
+
+    private function validateName(){ 
+        if ($this->name == ''){
+            $this->setError('name', 'naam is leeg'); //setError[$name]=$value;
+        }    
     }
 
     public function validatePassword(){
@@ -139,9 +144,4 @@ class User extends Model {
             $this->setError('password_repeat', 'herhaalde wachtwoord is ongelijk aan eerste wachtwoord');
         }
     }
-
-
-
-
-
 }

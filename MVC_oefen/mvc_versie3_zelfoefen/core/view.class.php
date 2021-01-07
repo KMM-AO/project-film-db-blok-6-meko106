@@ -29,8 +29,7 @@ class View
      * De constructor
      * - initialiseer de associatieve array met variabelen. 
      */
-    public function __construct()
-    {
+    public function __construct(){
         $this->vars = [];
         $this->add('_webroot', Router::getInstance()->getWebroot());
     }
@@ -39,8 +38,7 @@ class View
      * Instellen van de template
      * - voeg pad en extensie toe 
      */
-    public function setTemplate($value)
-    {
+    public function setTemplate($value){
         $this->template = '../templates/' . $value . '.template.php';
     }
     
@@ -48,8 +46,7 @@ class View
      * Variabele toevoegen
      * - voeg een nieuw key-value-paar toe aan de associatieve array met variabelen. 
      */
-    public function add($key, $value)
-    {
+    public function add($key, $value){
         $this->vars[$key] = $value;
     }
     
@@ -58,8 +55,7 @@ class View
      * - pak de associatieve array met variabelen uit (levert locale variabelen)
      * - stop de template in de response
      */
-    public function render()
-    {
+    public function render(){
         extract($this->vars);
         require $this->template;
     }

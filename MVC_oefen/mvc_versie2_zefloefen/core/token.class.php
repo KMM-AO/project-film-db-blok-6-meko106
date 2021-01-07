@@ -24,8 +24,7 @@ class Token extends Model {
     
     /** setters */
     
-    public function setValue($value)
-    {
+    public function setValue($value){
         $this->setDataField('value', $value);
     }
     
@@ -76,9 +75,7 @@ class Token extends Model {
             $this->setData($data);
         }
     }
-    
-    /** acties bij REGISTRATIE en LOGIN */
-    
+        
     public function generate(){
         $this->setValue(uniqid());
         $this->save();
@@ -89,17 +86,10 @@ class Token extends Model {
         $this->generate();
     }
     
-    /** 
-     * AUTHENTICATIE
-     * 
-     * authenticatie gaat bij voorkeur via een COOKIE, maar omdat dat lastig is in een 
-     * situatie waarbij je het token moet versturen vanaf een SPA (zoals Vue) in een ander 
-     * domein dan de API-backend, is er hier gekozen voor POST.
-     */
     
     public function authenticated(){
         $this->setValue($_POST['token'] ?? '');
-        
+          
         if ($this->value == ''){
             $this->setError('token', 'token ontbreekt');
         }else{

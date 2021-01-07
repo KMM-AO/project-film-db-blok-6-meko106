@@ -1,17 +1,12 @@
 <?php
 
-/**
- * @author Jeroen van den Brink
- * @copyright 2020
- */
 
 namespace core;
 
 /**
  * Objecten van de class Route worden gedefinieerd in de configuratiefile routes.conf.php
  */
-class Route
-{
+class Route{
     /**
      * properties
      */
@@ -26,8 +21,7 @@ class Route
      * constructor
      * - leg de vier geconfigureerde properties vast
      */    
-    public function __construct($request_url, $request_method, $controller_class, $controller_method)
-    {
+    public function __construct($request_url, $request_method, $controller_class, $controller_method){
         $this->request_url          = $request_url; 
         $this->request_method       = $request_method;
         $this->controller_class     = $controller_class;
@@ -36,19 +30,16 @@ class Route
     /**
      * check of de route matcht met een request
      */
-    public function matches(Request $request)
-    {
+    public function matches(Request $request){
         return $this->methodMatches($request->getMethod()) && $this->uriMatches($request->getUri());
     }
     
-    private function methodMatches($method)
-    {
+    private function methodMatches($method){
         $ok = ($method == $this->request_method);
         return $ok;
     }
     
-    private function uriMatches($uri)
-    {
+    private function uriMatches($uri){
         // gebruik een teken als delimiter dat niet voorkomt in de geconfigureerde urls
         $ok = preg_match('#^' . $this->request_url . '$#', $uri, $matches);
         if ($ok) {
@@ -64,16 +55,11 @@ class Route
      * - combineer controller-object en -method tot een callable (de method)
      * - voer de method uit met de parameters uit de request 
      */
-    public function deploy()
-    {
-        $class = '\\app\\controllers\\' . $this->controller_class;
-        
-        $controller = new $class();
+    public function deploy(){
+        $class = '\\app\\controllers\\' . $this->controller_class; //   $class= /app/controllers/ $this->controllers_class
+        $controller = new $class(); // $class_file ..//-> ../app/controllers/ -> controllers_class
         
         $callable = [$controller, $this->controller_method];
-        
         call_user_func_array($callable, $this->request_parameters);
-          
     }
-    
 }
