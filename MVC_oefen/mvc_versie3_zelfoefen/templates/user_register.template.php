@@ -41,9 +41,9 @@
     
     <label for="password_repeat">Wachtwoord (herhaal): <span class="error"><?= $errors['password_repeat'] ?? '' ?></span></label>
     <input type="password" name="password_repeat" id="password_repeat"/>
-    
-    <input type="submit" value="Registreer!"/>
 
+    <input type="submit" value="Registreer!"/>
+    
 </form>
 
 

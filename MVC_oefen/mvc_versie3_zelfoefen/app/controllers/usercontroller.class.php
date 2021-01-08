@@ -27,13 +27,16 @@ class UserController extends Controller
         // BUG 1: alleen als de referer niet de registratie-actie (bij foute validatie) is
         // BUG 2: niet beschikbaar als registratiepagina de landingpagina is
         $this->session->add('referer', $_SERVER['HTTP_REFERER']);
-        
+        //here we add it to the session
         $this->view->setTemplate('user_register');
         $this->view->add('action', 'user/register');
         $this->view->add('errors', $this->session->getOnce('errors'));
         $this->view->add('post', $this->session->getOnce('post'));
         $this->view->render();
     }
+
+
+    
 
     public function register_form_api()
     {

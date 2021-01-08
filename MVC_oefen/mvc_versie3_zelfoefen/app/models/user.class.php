@@ -19,8 +19,7 @@ class User extends Model {
     private $password;
     private $password_repeat;
     
-    public function __construct()
-    {
+    public function __construct(){
         /**
          * Roep de parent-constructor aan met ��n optionele parameter:
          * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]

@@ -40,7 +40,7 @@ abstract class Controller{
      */
     public function __construct(){
         $this->session = Session::getInstance();
-
+        
         $this->json = new Json();
 
         $this->token = new Token();        
