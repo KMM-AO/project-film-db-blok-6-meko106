@@ -7,6 +7,7 @@
 class Router{
 
     private static $instance;
+    private $webroot;
 
     public function __construct(){
 
@@ -14,22 +15,11 @@ class Router{
 
 
 
-    public function getInstance(){ // should be one time object
-        if(!isset(self::$instance)){
-            self::$instance=new self();
-        }
-        return self::$instance;
-    }
-
-
-    public function findTheWebroot(){
-
-
-    }
+  
 
 
 
-    public function go(){
+    public function getInfo(){
 
     }
 

@@ -22,6 +22,10 @@ class obj extends Model{
 $obj=new obj();
 $obj->showView2();
 
+// echo $_SERVER['DOCUMENT_ROOT'];
+echo $_SERVER["HTTP_HOST"];
+
+
 
 
 ?>
