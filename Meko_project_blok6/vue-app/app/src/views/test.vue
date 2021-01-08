@@ -1,8 +1,7 @@
 <template>
 
 <div>
-    <h1>contact</h1>
-    <h2>This is the contact page</h2>
+    <h1>test</h1>
     <hello-world msg="Wlekosfkdsk"></hello-world>
 </div>
 

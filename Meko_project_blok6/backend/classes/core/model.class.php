@@ -23,12 +23,13 @@ abstract class Model{  //main class
         $pdo=Database::getInstance()->getPdo();
         $class=get_called_class();
         $query='SELECT * FROM '.$class::TABLE_NAME.' ';
-        
+
         $stmt= $pdo->prepare($query);
         $stmt->execute();
         $records= $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $
+
+        
     }
 
 

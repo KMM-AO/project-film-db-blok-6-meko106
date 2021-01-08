@@ -11,7 +11,6 @@ class View{
     public function __construct(){
 
         $this->vars=[];
-
     }
 
     public function add($key,$value){
@@ -19,7 +18,7 @@ class View{
     }
 
     public function render(){
-        
+
     }
 
 

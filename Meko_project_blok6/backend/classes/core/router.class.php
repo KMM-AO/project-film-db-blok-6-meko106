@@ -23,7 +23,6 @@ class Router{
 
 
     public function findTheWebroot(){
-        $
 
 
     }
