@@ -1,7 +1,7 @@
 <?php
 
 
-// use test\User;
+// use Thecodeholic\User;
 
 // require_once 'User.php';
 

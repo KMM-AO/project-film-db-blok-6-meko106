@@ -1,6 +1,6 @@
 <?php
 
-namespace test;
+namespace Thecodeholic;
 
 class User{
 
