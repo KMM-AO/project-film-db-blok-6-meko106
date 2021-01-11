@@ -20,8 +20,10 @@ abstract class Model {
     private $primary_type;  /** het pdo-param-type van het primary-key-veld */
     
     private $errors;        /** de associatieve array met validatie-errors */
-    
-    
+
+
+
+
     /** 
      * De constructor
      * - kan worden aangeroepen door de child constructor
@@ -89,10 +91,11 @@ abstract class Model {
      * - een method om de errors op te halen
      * - eem method om te checken of er errors zijn 
      */
-    protected function setError($name, $value){
+    protected function setError($name, $value)
+    {
         $this->errors[$name] = $value;
     }
-    
+
     public function getErrors()
     {
         return $this->errors ?? [];

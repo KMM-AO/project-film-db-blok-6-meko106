@@ -13,8 +13,7 @@ use PDO;
  * Het PDO-object is daarom een property van de Database class.
  */
 
-class Database
-{
+class Database{
     
     /**
      * static object van de class Database
@@ -48,10 +47,8 @@ class Database
     /**
      * retourneert een object van de class Database zelf
      */
-    public static function getInstance()
-    {
-        if (!isset(self::$instance))
-        {
+    public static function getInstance(){
+        if (!isset(self::$instance)){
             self::$instance = new self();
         }
         return self::$instance;
@@ -60,7 +57,7 @@ class Database
     /** getter voor het PDO-object */
     public function getPdo()
     {
-        return $this->pdo;
+        return $this->pdo; 
     }
 
 }

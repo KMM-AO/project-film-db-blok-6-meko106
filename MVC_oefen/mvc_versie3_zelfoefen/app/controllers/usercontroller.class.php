@@ -5,27 +5,11 @@ namespace app\controllers;
 
 use app\models\User;
 
-class UserController extends Controller
-{
-    
-    /**
-     * REGISTRATIE-REQUESTS
-     * 
-     * - formulier voor web
-     * - formulier voor api (simulatie, in de praktijk niet hier)
-     * - actie voor web
-     * - actie voor api
-     */
-    
-    /**
-     * Registratie-formulier (2x)
-     * - verstuurt name, email, password en password_repeat
-     */
+class UserController extends Controller{
 
-    public function register_form()
-    {
-        // BUG 1: alleen als de referer niet de registratie-actie (bij foute validatie) is
-        // BUG 2: niet beschikbaar als registratiepagina de landingpagina is
+
+    public function register_form(){
+     
         $this->session->add('referer', $_SERVER['HTTP_REFERER']);
         //here we add it to the session
         $this->view->setTemplate('user_register');
@@ -38,8 +22,7 @@ class UserController extends Controller
 
     
 
-    public function register_form_api()
-    {
+    public function register_form_api(){
         $this->view->setTemplate('user_register');
         $this->view->add('action', 'api/user/register');
         $this->view->render();
@@ -55,8 +38,7 @@ class UserController extends Controller
      * - bij mislukking/succes (web): redirect met sessiedata
      */
     
-    public function register()
-    {
+    public function register(){
         $user = new User();
 
         $user->setName(trim($_POST['name'] ?? ''));
@@ -73,9 +55,7 @@ class UserController extends Controller
             $this->session->add('post', array_diff_key($_POST, ['password' => '', 'password_repeat' => '']));
             
             $this->redirect('user/register');
-        }
-        else
-        {          
+        }else{          
             $this->session->add('message', 'Dank voor de registratie...');
             $this->session->add('token', $user->getToken()->value);
 
@@ -94,13 +74,10 @@ class UserController extends Controller
         
         $user->register();
         
-        if (!$user->isValid())
-        {
+        if (!$user->isValid()){
             $this->json->add('success', false);
             $this->json->add('errors', $user->getErrors());
-        }
-        else
-        {
+        }else{
             $this->json->add('success', true);
             $this->json->add('user_name', $user->name);
             $this->json->add('token', $user->getToken()->value);
@@ -135,6 +112,8 @@ class UserController extends Controller
         $this->view->render();
     }
 
+
+
     public function login_form_api()
     {
         $this->view->setTemplate('user_login');
@@ -154,43 +133,37 @@ class UserController extends Controller
 
     public function login(){
         $user = new User();
-        
+
         $user->setEmail($_POST['email'] ?? '');
         $user->setPassword($_POST['password'] ?? '');
         
         $user->login();
-        
-        if (!$user->isValid())
-    {
+
+        if (!$user->isValid()){
             $this->session->add('message', 'Inloggegevens zijn niet correct...');
             $this->session->add('errors', $user->getErrors());
             $this->session->add('post', array_diff_key($_POST, ['password' => '']));
-            
+
             $this->redirect('user/login');}
         else{
             $this->session->add('message', 'Je bent ingelogd...');
             $this->session->add('token', $user->getToken()->value);
-
             header('location: ' . $this->session->getOnce('referer'));
         }
     }
 
-    public function login_api()
-    {
+    public function login_api(){
         $user = new User();
-        
+
         $user->setEmail($_POST['email'] ?? '');
         $user->setPassword($_POST['password'] ?? '');
-        
+
         $user->login();
         
-        if (!$user->isValid())
-        {
+        if (!$user->isValid()){
             $this->json->add('success', false);
             $this->json->add('errors', $user->getErrors());
-        }
-        else
-        {
+        }else{
             $this->json->add('success', true);
             $this->json->add('user_name', $user->name);
             $this->json->add('token', $user->getToken()->value);
@@ -213,8 +186,7 @@ class UserController extends Controller
      * Logout-formulier (1x)
      * - verstuurt token
      */    
-    public function logout_form_api()
-    {
+    public function logout_form_api(){
         $this->view->setTemplate('user_logout');
         $this->view->render();
     }

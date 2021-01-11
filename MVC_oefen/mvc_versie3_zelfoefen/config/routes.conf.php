@@ -1,5 +1,8 @@
 <?php
 
+use core\Route;
+
+
 $this->allowed_routes = [
 
     /** testroutes */

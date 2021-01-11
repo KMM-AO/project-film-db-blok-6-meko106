@@ -5,33 +5,22 @@
 namespace core;
 
 class Router{
-    /**
-     * static object van de class Router
-     */
+    
     private static $instance;
     
-    /**
-     * array met route-objecten; waarde wordt bepaald in configuratiefile config/routes.conf.php
-     */
+  
     private $allowed_routes;
 
 
     private $request;
-    
-    /**
-     * de gevonden actieve route; object van de class Route
-     */
+
     private $active_route;
     
-    /**
-     * de webroot; string met het absolute pad naar de webroot (de map public)
-     */
+
     private $webroot;
     
-    /**
-     * private constructor blokkeert het gebruik van new om Router-objecten te maken
-     */
-    private function __construct(){  // private blokkeert het maken van router classs objecten
+  
+    private function __construct(){  
     }
     
     private function __clone(){
@@ -49,13 +38,7 @@ class Router{
     }
     
     /** GETTERS */
-    
-    private function getAllowedRoutes(){
-        if (!isset($this->allowed_routes)){
-            require '../config/routes.conf.php';
-        }
-        return $this->allowed_routes;
-    }
+
     
     private function getRequest(){
         if (!isset($this->request)){
@@ -66,11 +49,7 @@ class Router{
 
     public function getWebroot(){
         if (!isset($this->webroot)){
-            /**
-             * $_SERVER['SCRIPT_NAME'] is normaliter: /pad/naar/de/webroot/index.php, 
-             * maar in principe is een andere filename dan index.php ook toegestaan. 
-             * Dat kun je dan in .htaccess aanpassen.
-             */
+ 
             $script = $_SERVER['SCRIPT_NAME'];
             
             /**
@@ -95,7 +74,8 @@ class Router{
      * Let op: deze method vindt de EERSTE route die overeenkomt met de request
      */
     private function matchRequest(){
-        foreach ($this->getAllowedRoutes() as $route){
+        require '../include/routes.conf.php';
+        foreach ($this->routes as $route){
             if ($route->matches($this->getRequest())){
                 $this->active_route = $route;           // onthoud gevonden route
                 return true;                            // stop met zoeken
@@ -103,7 +83,10 @@ class Router{
         }
         return false;
     }
-   
+    
+    /**
+     * voert de requestafhandeling uit
+     */
     public function go(){
         if (!$this->matchRequest()){
             $view = new View();

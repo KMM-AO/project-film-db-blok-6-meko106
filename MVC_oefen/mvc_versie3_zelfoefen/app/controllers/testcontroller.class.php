@@ -15,8 +15,7 @@ class TestController extends Controller
         $this->view->render();
     }
     
-    public function bla3()
-    {
+    public function bla3(){
         $this->view->setTemplate('bla3');
         $this->view->render();
     }
