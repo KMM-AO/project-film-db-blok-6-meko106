@@ -10,7 +10,6 @@ abstract class Model {
     
     protected $pdo;        
     
-    /** private properties */
 
     private $data;          
     
