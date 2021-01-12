@@ -15,10 +15,10 @@ class Route{
     
     
     public function __construct($request_url, $request_method, $controller_class, $controller_method){
-        $this->request_url          = $request_url; 
-        $this->request_method       = $request_method;
-        $this->controller_class     = $controller_class;
-        $this->controller_method    = $controller_method;
+        $this->request_url = $request_url; 
+        $this->request_method = $request_method;
+        $this->controller_class = $controller_class;
+        $this->controller_method  = $controller_method;
     }
     
 
@@ -32,7 +32,6 @@ class Route{
     }
     
     private function uriMatches($uri){
-        // gebruik een teken als delimiter dat niet voorkomt in de geconfigureerde urls
         $ok = preg_match('#^' . $this->request_url . '$#', $uri, $matches);
         if ($ok) {
             $this->request_parameters = array_slice($matches, 1); //$matches[0] $matches[1]
