@@ -68,20 +68,14 @@ class User extends Model {
         }
     }
 
-    public function validateEmail(){
-        $pattern='/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
-        $email=$this->getDataField('email');
-        $validata=preg_match($pattern,$email);
-        if($validata==0){
-            $this->setError('email error', 'The email dos not match');
-        }
-    }
+    // public function validateEmail(){
+    //     $email=$this->getDataField('email');
+    //     $validata=preg_match($pattern,$email);
+    //     if($validata==0){
+    //         $this->setError('email error', 'The email dos not match');
+    //     }
+    // }
     
-    private function validatePassword(){
-        if (strlen($this->password) < 12){
-            $this->setError('password', 'wachtwoord bevat minder dan 6 tekens');
-        }
-    }
 
 
 
