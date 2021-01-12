@@ -3,14 +3,12 @@
 
 namespace core;
 
-/**
- * Objecten van de class Route worden gedefinieerd in de configuratiefile routes.conf.php
- */
+
 class Route{
     /**
      * properties
      */
-    private $request_url;           // geconfigureerde reguliere expressie
+    private $request_url;           
     private $request_method;        // geconfigureerde waarde (GET of POST)
     private $request_parameters;    // worden bepaald met behulp van de reguliere expressie 
     

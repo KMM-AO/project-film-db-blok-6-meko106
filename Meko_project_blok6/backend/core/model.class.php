@@ -8,7 +8,7 @@ use PDO;
 abstract class Model {
     
     
-    protected $pdo;         /** de databaseconnectie */
+    protected $pdo;        
     
     /** private properties */
 
@@ -16,9 +16,9 @@ abstract class Model {
     
     private $primary_name; 
     
-    private $primary_type;  /** het pdo-param-type van het primary-key-veld */
+    private $primary_type;  
     
-    private $errors;        /** de associatieve array met validatie-errors */
+    private $errors;      
 
 
 
@@ -30,13 +30,10 @@ abstract class Model {
 
     }
    
-    /** getter voor alle data (heel record) in 1x */
-    public function getData()
-    {
+    public function getData(){
         return $this->data;
     }
 
-    /** getter voor data (specifiek veld) */ 
     protected function getDataField($name)
     {
         return $this->data[$name] ?? NULL;
