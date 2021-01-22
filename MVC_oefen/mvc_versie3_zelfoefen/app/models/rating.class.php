@@ -23,7 +23,7 @@ class Rating extends Model {
 
     /** setters */
     
-    public function setId($value)
+    public funsction setId($value)
     {
         $this->setDataField('id', $value);
     }

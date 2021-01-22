@@ -16,7 +16,7 @@ class View{
         $this->add('webroot', Router::getInstance()->getWebroot());
         //add() adds an key and value to the vars array 
     }
-
+    
 
     public function setTemplate($value){
         $this->template = '../templates/' . $value . '.template.php';

@@ -22,7 +22,6 @@ class Product extends Model {
          *   default is ['id', PDO::PARAM_INT]
          */
         parent::__construct();
-        // it is an child of the Model class
     }
     
     /** setter voor de id */

@@ -127,34 +127,6 @@ $this->allowed_routes = [
         'logout_form_api'
     ),
 
-    /** api-requests voor user-acties: registratie, login, authenticatie, logout */
     
-    new \core\Route(
-        'api/user/register',
-        'POST',
-        'UserController',
-        'register_api'
-    ),
-    
-    new \core\Route(
-        'api/user/login',
-        'POST',
-        'UserController',
-        'login_api'
-    ),
-    
-    new \core\Route(
-        'api/user/authenticate',
-        'POST',
-        'UserController',
-        'authenticate_api'
-    ),
-    
-    new \core\Route(
-        'api/user/logout',
-        'POST',
-        'UserController',
-        'logout_api'
-    )
 ];
 

@@ -7,22 +7,16 @@ use PDO;
 
 class Token extends Model {
     
-    /** de bijbehorende database-tabel */
     const TABLENAME = 'tokens';
     
     /** relatie-properties */
     private $user;              // token heeft 1-op-1-relatie met user
     
     public function __construct(){
-        /**
-         * Roep de parent-constructor aan met ��n optionele parameter:
-         * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
-         *   default is ['id', PDO::PARAM_INT]
-         */
+
         parent::__construct(['value', PDO::PARAM_STR]);
     }
     
-    /** setters */
     
     public function setValue($value){
         $this->setDataField('value', $value);
@@ -44,7 +38,6 @@ class Token extends Model {
         return $this->user;
     }
 
-    /** niet-generieke database-acties */
     
     private function save(){
         $query =
@@ -74,9 +67,9 @@ class Token extends Model {
             $this->setData($data);
         }
     }
-    
-    /** acties bij REGISTRATIE en LOGIN */
-    
+
+
+
     public function generate(){
         $this->setValue(uniqid());
         $this->save();
@@ -86,16 +79,8 @@ class Token extends Model {
         $this->delete($success);
         $this->generate();
     }
-    
-    /** 
-     * AUTHENTICATIE
-     * 
-     * API-authenticatie gaat bij voorkeur via een COOKIE, maar omdat dat lastig is in een 
-     * situatie waarbij je het token moet versturen vanaf een SPA (zoals Vue) in een ander 
-     * domein dan de API-backend, is er hier gekozen voor POST.
-     * 
-     * Web-authenticatie gaat via de sessie.
-     */
+
+
     
     public function authenticate(){
         $session = Session::getInstance();
@@ -104,16 +89,12 @@ class Token extends Model {
         
         if ($this->value == ''){
             $this->setError('token', 'token ontbreekt');
-        } 
-        else
-        {
+        }else{
             $this->load($success);
             
-            if (!$success)
-            {
+            if (!$success){
                 $this->setError('token', 'token is ongeldig');
             }
         }
     }
- 
 }

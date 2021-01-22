@@ -54,5 +54,4 @@ class Session{
         return $value;
     }
     
-    
 }

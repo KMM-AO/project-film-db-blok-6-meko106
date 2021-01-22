@@ -53,7 +53,7 @@ class User extends Model {
     
     
     public function getToken(){
-        if (!isset($this->token)){    
+        if (!isset($this->token)){
             $this->token = new Token();
             $this->token->setIdUser($this->id);
             $this->token->loadByUser($success);
@@ -134,8 +134,7 @@ class User extends Model {
             }
         }
         
-        if ($this->isValid())
-        {
+        if ($this->isValid()){
             $this->getToken()->regenerate();
         }
     }

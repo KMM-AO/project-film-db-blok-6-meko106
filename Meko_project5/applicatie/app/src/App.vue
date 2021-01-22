@@ -9,8 +9,7 @@
 </template>
 <script>
 import TheNav from "@/components/TheNavigation.vue";
-// import bodyNr from "@/components/bodyTow.vue";
-// import goBack from "@/components/goback.vue";
+
 
 
 export default {

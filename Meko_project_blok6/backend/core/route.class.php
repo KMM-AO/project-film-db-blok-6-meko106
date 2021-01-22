@@ -39,6 +39,10 @@ class Route{
         return $ok;
     }
 
+    public function getTheId(){
+        return $_GET['id'];
+    }
+
     public function deploy(){
         $class = '\\app\\controllers\\' . $this->controller_class; //   $class= /app/controllers/ $this->controllers_class
         $controller = new $class(); // $class_file ..//-> ../app/controllers/ -> controllers_class

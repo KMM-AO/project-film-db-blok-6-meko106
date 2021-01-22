@@ -45,9 +45,7 @@ class Router{
 
     public function getWebroot(){
         if (!isset($this->webroot)){
- 
             $script = $_SERVER['SCRIPT_NAME'];
-        
             $this->webroot = dirname($script);
             
             if ($this->webroot != '/') {

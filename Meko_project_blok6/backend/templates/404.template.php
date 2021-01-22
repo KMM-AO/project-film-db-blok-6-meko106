@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta http-equiv="content-type" content="text/html" />
+	<meta name="author" content="Jeroen van den Brink" />
+
+	<title>404</title>
 </head>
+
 <body>
 
-<h1>ERROR</h1>
-<h2>This page does not exist</h2>
+<?php require '../templates/includes/nav.template.php'; ?>
 
-<br>
+<h1>404</h1>
+
+<p>De opgevraagde pagina bestaat niet (meer)!</p>
+
+<p><?= $_message ?? '' ?></p>
 
 </body>
-
 </html>
