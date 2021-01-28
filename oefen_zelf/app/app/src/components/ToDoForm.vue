@@ -13,3 +13,18 @@
     </button>
   </form>
 </template>
+
+<script>
+export default {
+  methods:{
+    onSubmit(){
+      this.$emit('todo-added', this.label);
+    }
+  },
+  data(){
+    return {
+      label:''
+    }
+  }
+}
+</script>

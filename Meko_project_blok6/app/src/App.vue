@@ -1,27 +1,17 @@
 <template>
-
   <div id="nav">
     <navbar></navbar>
 
-
-  <router-view/>
-
-
+    <router-view />
   </div>
-
 </template>
 
 <script>
-
-import navbar from '@/components/TheNavBar'
+import navbar from "@/components/TheNavBar";
 export default {
-
-  components:{
+  components: {
     navbar,
-  }
-}
+  },
+};
 </script>
 
-<style>
-
-</style>

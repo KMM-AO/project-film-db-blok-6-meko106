@@ -22,7 +22,7 @@ class User extends Model {
     public function __construct()
     {
         /**
-         * Roep de parent-constructor aan met ï¿½ï¿½n optionele parameter:
+         * Roep de parent-constructor aan met één optionele parameter:
          * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
          *   default is ['id', PDO::PARAM_INT]
          */
@@ -99,7 +99,7 @@ class User extends Model {
 
     /**
      * method om de rating van een bepaald product op te halen
-     * @todo onderstaande code is simpel (voordeel) maar inefficiï¿½nt (nadeel) 
+     * @todo onderstaande code is simpel (voordeel) maar inefficiënt (nadeel) 
      * een goeie tussenweg: de relatie $ratings indexeren op product-id
      */
     public function getRatingByProduct($id_product)

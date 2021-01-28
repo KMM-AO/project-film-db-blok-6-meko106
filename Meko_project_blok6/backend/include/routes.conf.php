@@ -3,19 +3,20 @@
 use core\Route;
 
 
-$this->routes = [
+$this->allowed_routes =
+[
 
     new Route(
-        'indexFilms',
+        'IndexFilms',
         'GET',
         'filmcontroller',
         'films_index'
     ),
     new Route(
-        'indexFilmsId/[1-50]',
+        'ShowFilm/([0-9][0-9]*)',
         'GET',
         'filmcontroller',
-        'filmsindexUsingId'
+        'FilmShow'
     ),
 
     new Route(

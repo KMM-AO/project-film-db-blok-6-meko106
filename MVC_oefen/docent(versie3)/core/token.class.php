@@ -13,9 +13,10 @@ class Token extends Model {
     /** relatie-properties */
     private $user;              // token heeft 1-op-1-relatie met user
     
-    public function __construct(){
+    public function __construct()
+    {
         /**
-         * Roep de parent-constructor aan met ï¿½ï¿½n optionele parameter:
+         * Roep de parent-constructor aan met één optionele parameter:
          * primary-key-definitie als een array met twee elementen [naam, pdo-paramtype]
          *   default is ['id', PDO::PARAM_INT]
          */
@@ -87,12 +88,14 @@ class Token extends Model {
     
     /** acties bij REGISTRATIE en LOGIN */
     
-    public function generate(){
+    public function generate()
+    {
         $this->setValue(uniqid());
         $this->save();
     }
     
-    public function regenerate(){
+    public function regenerate()
+    {
         $this->delete($success);
         $this->generate();
     }

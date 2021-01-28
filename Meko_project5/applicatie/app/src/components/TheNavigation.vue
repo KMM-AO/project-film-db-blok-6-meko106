@@ -15,7 +15,6 @@
         <!-- <router-link to="Home" class="nav-link" ><span class="sr-only">(current)</span></router-link> -->
       </li>
     </ul>
-
     
     <form class="form-inline my-2 my-lg-0">
   

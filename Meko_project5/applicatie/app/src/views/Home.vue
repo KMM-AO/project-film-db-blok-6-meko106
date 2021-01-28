@@ -34,7 +34,7 @@ export default {
     showMore(){
       this.n+=5;
     },
-    getFromDB() {
+    getFromDB() {  
       fetch("http://localhost/project_jaar2/Meko_project5/applicatie/api/webroot/show_json.php")
         .then((response) => response.json() )
         .then((data) => (this.status = data))

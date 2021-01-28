@@ -10,7 +10,8 @@ namespace core;
 /**
  * Deze class is bedoeld voor de response op API-requests.
  */
-class Json{
+class Json
+{
     /** 
      * De data (een array) die als JSON-string in de response moet komen. 
      */
@@ -20,21 +21,24 @@ class Json{
      * De constructor
      * - stel de status in als ok (kan overschreven worden)
      */
-    public function __construct(){
+    public function __construct()
+    {
         $this->setStatus(200, 'ok');
     }
     
     /** 
      * Stop een status in de response-data (code en message)
      */
-    public function setStatus($code, $message){
+    public function setStatus($code, $message)
+    {
         $this->add('status', ['code' => $code, 'message' => $message]);
     }
     
     /**
      * Voeg gegevens toe aan de response-data.
      */
-    public function add($key, $value){
+    public function add($key, $value)
+    {
         $this->data[$key] = $value;
     }
     

@@ -3,10 +3,9 @@ import Home from '../views/Home.vue'
 import Register from '../views/RegisterForm.vue'
 import Login from '../views/LogInForm.vue'
 
-
 const routes = [
   {
-    path: '/',
+    path: '/Home',
     name: 'Home',
     component: Home
   },
@@ -19,6 +18,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/Film/:id?',
+    name: 'Film',
+    component: ()=>import(/* webpackChunkName:"Films"*/ '../views/Film.vue')
   },
 ]
 
