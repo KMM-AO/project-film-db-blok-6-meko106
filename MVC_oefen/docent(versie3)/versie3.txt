@@ -1,0 +1,95 @@
+Aanpassingen in deze versie (3)
+
+1: ik wil in mijn templates kunnen zien of er een geauthenticeerde user is. In eerste instantie in de (nog toe te voegen) navigatie: wel ingelogd = naam tonen + uitloglink, niet ingelogd = inloglink + registratielink. 
+
+Oplossing: zorg dat er in de template een variabele $_authuser bestaat.
+
+Acties: nog niks, maar zie het gewenste gebruik in de template templates/includes/nav.template.php.
+
+-----------------------------------
+
+2: De oplossing van het eerste probleem levert meteen het tweede probleem: omdat dit voor de navigatie van belang is, wil je ALTIJD authenticeren, niet alleen in controller-methods waarvan je weet dat het daar nodig is. Ik wil bovendien ook váker kunnen controleren of er een via het token geauthenticeerde user is. Er was een method: core\Token::authenticated() die beide dingen doet: het token uitlezen uit de POST en valideren, én retourneren of het geldig is. Die combinatie is nu niet handig.
+
+Oplossing: doe de authenticatie in de constructor van de controller (dan gebeurt het ALTIJD) en zie af van een returnwaarde. Je kunt altijd de isValid()-method van het Token-object gebruiken om te checken of er een geauthenticeerde user is.
+
+Acties:
+- hernoem core\Token::authenticated() naar authenticate() - dus geen boolean returnwaarde meer
+- doe de authenticatie in app\controllers\Controller::__construct()
+- stop ook meteen de bijbehorende user in het View-object (is actie voor het eerste probleem)
+- aanpassing app\controllers\UserController::logout_api() en authenticate_api() - daar werd authenticated() aangeroepen in een if-statement, gebruik nu de (al bestaande) isValid-method
+
+---------------------------------------
+
+3: ik wil navigatie in een include-bestand en dat moet werken voor requests met variërende virtuele mapdieptes. 
+
+Oplossing: geef de webroot mee aan de view.
+
+Acties: 
+- relatieve paden in templates voorzien van een variabele $_webroot
+- toevoegen van die variabele in de constructor van de class Core/View
+- requires bovenin de templates voor de navigatie
+- navigatie-template in de map templates/includes (is ook een nieuwe map)
+
+---------------------------------------------
+
+4: ik wil 5 web-user-routes toevoegen aan mijn route-configuratie (naast de 4 api-user-routes en de 4 bijbehorende routes voor formulieren om de api-routes te kunnen testen), maar de tot nu toe gehanteerde naamgeving van de 8 bestaande user-routes is onhandig gekozen.
+
+Oplossing: hernoem urls en methodnamen.
+
+Acties:
+- aanpassingen route-urls en controller-methodnamen voor de vier api-user-simulatieformulieren: urls veranderen van GET user/register (etc.) naar GET api/user/register (etc.); controller-methodnamen krijgen het achtervoegsel _api
+- aanpassingen controller-methodnamen voor de vier api-user-requests: controller-methodnamen krijgen het achtervoegsel _api
+- toevoegingen routes voor web aan de configuratie: registratieformulier, registratie, inlogformulier, inloggen, uitloggen
+
+------------------------------------------------
+
+5: ik moet de web-user-registratie implementeren, dus ik heb twee controller-methods nodig, een formulier (GET) en een actie (POST). Dat betekent onder andere redirects en sessies. Ik wil voor het formulier dezelfde template gebruiken voor api- en webvariant, maar die hebben verschillende form-actions.
+
+Acties:
+- nieuwe method app\controllers\UserController::register_form en aanpassing register_form_api
+- nieuwe method app\controllers\UserController::register en aanpassing register_api
+- nieuwe class core\Session
+- nieuwe method app\controllers\Controller::redirect()
+
+-------------------------------------------------
+
+6: voor web-authenticatie wil ik gebruikmaken van het token in de sessie
+
+Acties: 
+- aanpassing (sessie-check) core\Token::authenticate()
+
+---------------------------------------------------
+
+7: ik moet de web-login implementeren. De aanpassingen zijn vergelijkbaar aan de registratie.
+- aanpassen template loginformulier (variabele action, messages, errors, oude post)
+- toevoegen/aanpassen controllermethods - helemaal conform registratie-aanpassingen
+
+---------------------------------------------------
+
+8: ik moet de web-logout implementeren. Het gaat hierbij alleen om de logout-actie; er is niet zoiets als een logout-formulier nodig. Een button in de navigatie is voldoende.
+
+----------------------------------------------------
+
+Nu kan ik een product-rating-systeem toevoegen (ik begin opnieuw te tellen)
+
+stap 1: voeg aan de template product_show conditioneel (wel of niet ingelogd) een formulier toe, waarmee een ingelogde user het product kan raten. Het formulier moet vooraf ingevuld zijn met een eventueel eerder gegeven rating: $user_rating_value. Die variabele moet dus in de bijbehorende controllermethod toegevoegd zijn.
+
+-----------------------------------------------------
+
+stap 2: voor het bepalen van een eerder gegeven rating is een method nodig op de user of op het product. Dat is dus gewoon een kwestie van kiezen. 
+Ik kies voor de eerste: app\models\User::getRatingByProduct($id_product) 
+Deze method retourneert een object van de class Rating (die we overigens nog niet hebben) - of null (niet gevonden).
+
+-----------------------------------------------------
+
+stap 3: in de genoemde method blijkt het nodig om ook de relatie te definiëren: app\models\User::getRatings() 
+
+------------------------------------------------------
+
+stap 4: voor de relatie-method, is een method nodig app\models\Rating::indexByUser($id_user) en dus moet ik nu ook de class app\models\Rating zelf maken
+
+-------------------------------------------------------
+
+stap 5: voor het raten gebruik ik de request POST product/rate/{id} waarbij {id} een product-id is. De gekoppelde controller-method is app\controllers\ProductController::rate($id). De value van de rating zit in de POST en de ingelogde user is bekend in de backend. Deze request is alleen toegestaan voor ingelogde users. De method redirect altijd naar product/show/{id}.
+Belangrijk: rekening houden met de mogelijkheid van herwaarderen.
+
