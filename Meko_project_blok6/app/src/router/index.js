@@ -3,7 +3,6 @@ import Home from '../views/Home.vue'
 // import Register from '../views/RegisterForm.vue'
 // import Login from '../views/LogInForm.vue
 
-
 const routes = [
   {
     path: '/Home',

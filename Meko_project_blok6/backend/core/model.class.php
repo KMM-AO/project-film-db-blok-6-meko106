@@ -5,6 +5,7 @@ namespace core;
 use \core\Database;
 use PDO;
 
+
 abstract class Model {
     
     /** door alle child classes gedeelde properties */ 
