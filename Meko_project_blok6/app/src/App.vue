@@ -6,7 +6,6 @@
   </div>
 </template>
 
-
 <script>
 import navbar from "@/components/TheNavBar";
 export default {

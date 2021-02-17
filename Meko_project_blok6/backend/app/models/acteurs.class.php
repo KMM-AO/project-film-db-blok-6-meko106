@@ -6,6 +6,7 @@ use core\Model;
 use core\Database;
 use PDO;
 
+
 class Acteurs extends Model{
 
     protected $filmId;

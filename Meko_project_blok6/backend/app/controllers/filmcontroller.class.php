@@ -5,7 +5,6 @@ use app\controllers\Controller;
 use app\models\Films;
 use core\Router;
 
-
 require 'controller.class.php';
 
 class filmController extends Controller{

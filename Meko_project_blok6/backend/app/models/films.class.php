@@ -7,6 +7,7 @@ use core\Model;
 class Films extends Model{
 
     const TABLENAME='films';
+
     public $persons;
 
 
