@@ -3,6 +3,8 @@
 namespace app\models;
 
 use core\Model;
+use core\Database;
+use PDO;
 
 
 
@@ -12,6 +14,7 @@ class Acteurs extends Model{
 
     public function __construct(){
         parent::__construct();
+        
     }
     
     public function getFilmId(){
@@ -26,17 +29,18 @@ class Acteurs extends Model{
         JOIN persons ON persons.id=films_acteurs.id_acteur
         WHERE films_acteurs.id_film= :film_id
         ';
-        $stmt=$this->pdo->prepare($query);
+        $pdo=Database::getInstance()->getPdo();
+        $stmt=$pdo->prepare($query);
         $stmt->bindValue('film_id', $film_id);
         $stmt->execute();
         $records=$stmt->fetchAll(PDO::FETCH_ASSOC);
         $objects=[];
-        foreach($records as $record){
-            $object=new self($pdo);
-            $object->setData($record);
-            $objects[]=$object;
-        }
-        return $objects;
+        // foreach($records as $record){
+        //     $object=new self();
+        //     $object->setData($record);
+        //     $objects[]=$object;
+        // }
+        return $records;
     }
 
 

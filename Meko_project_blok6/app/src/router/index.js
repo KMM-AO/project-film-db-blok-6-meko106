@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Register from '../views/RegisterForm.vue'
-import Login from '../views/LogInForm.vue'
+// import Register from '../views/RegisterForm.vue'
+// import Login from '../views/LogInForm.vue'
 
 const routes = [
   {
@@ -9,18 +9,18 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  // {
+  //   path: '/register',
+  //   name: 'Register',
+  //   component: Register
+  // },
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   component: Login
+  // },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/Film/:id?',
+    path: '/Film/:id',
     name: 'Film',
     component: ()=>import(/* webpackChunkName:"Films"*/ '../views/Film.vue')
   },

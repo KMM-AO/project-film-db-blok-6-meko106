@@ -3,19 +3,21 @@
 namespace app\models;
 
 use core\Model;
+use core\Database;
+use PDO;
 
 
 class Regisseur extends Model{
 
 
 
-    public function __construct(PDO $pdo){
-        parent:: __construct($pdo);
+    public function __construct(){
+        parent:: __construct();
     }
 
   
     public function getId(){
-        return $this->getFromData('id');
+        return $this->getDataField('id_regisseur');
     }
     
     
@@ -25,19 +27,17 @@ class Regisseur extends Model{
 
     
 
-    public function getFromDB(){
-        $query='SELECT * FROM persons WHERE id=:id';
+    public function getFromDB($id){
+        $query='SELECT * FROM persons WHERE :id=id';
+        $pdo=Database::getInstance()->getPdo();
 
-        $stmt=$this->pdo->prepare($query);
-        $stmt->bindValue(':id', $this->getId(), PDO::PARAM_INT );
+
+        $stmt=$pdo->prepare($query);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT );
         $stmt->execute();
-        $records=$stmt->fetch(PDO::FETCH_ASSOC);
-        $succes=($records!=false);
-        if($succes){
-            $this->setData($records);
-        }else{
-            echo "There were something went wrong";
-        }
+        $records=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $records;
     }
 
 

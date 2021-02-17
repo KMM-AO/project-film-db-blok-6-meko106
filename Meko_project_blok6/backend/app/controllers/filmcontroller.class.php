@@ -25,22 +25,25 @@ class filmController extends Controller{
 
     public function FilmShow(){ //geein
 
-        $product = new Films();
+        $film = new Films();
         $UriString=explode('/' , $_SERVER['REQUEST_URI']); 
         $id=$UriString[sizeof($UriString)-1 ] ; 
         
-        $product->setId($id);
-        $product->load($success);
-        if (!$success)
-        {
+        $film->setId($id);
+        $film->load($success);
+        if (!$success){
             // $this->view->setTemplate('404');
-        }
-        else
-        {
-            $this->json->add('film', $product->getData());   
+        }else{
+            $filmData=$film->getData();
+            $filmData["acteurs"]=$film->getActeurs();
+            $filmData["regisseur"]=$film->getRegisseur();
+            $this->json->add('film', $filmData  );   
         }
         $this->json->render();
     }
+
+
+
 
 
 }
