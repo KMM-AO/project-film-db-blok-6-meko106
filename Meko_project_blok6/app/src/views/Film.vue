@@ -6,7 +6,7 @@
       <div class="row g-0" v-if="filmsData.length !== 0">
         <div class="col-md-4">
           <img :src="require(`@/assets/${filmsData.img}`)"  class="card-img-top imgss" alt="...">
-        </div>
+        </div>  
         <div class="col-md-8 info">
           <div class="card-body">
             <p class="card-title filmNaam">{{ filmsData.naam }}</p>

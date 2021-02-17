@@ -10,7 +10,7 @@
             <p class="filmLand">Land: {{film.land}} || Jaar: {{film.jaar}}</p>
             <p class="card-text filmBeschrijving">{{film.beschrijving}}</p>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
 

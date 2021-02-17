@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 use app\controllers\Controller;
-
 use app\models\Films;
 use core\Router;
 

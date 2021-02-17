@@ -3,9 +3,8 @@
 namespace app\models;
 
 use core\Model;
-use core\Database;
+use core\Database; 
 use PDO;
-
 
 class Regisseur extends Model{
 

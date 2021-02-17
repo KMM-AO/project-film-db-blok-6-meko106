@@ -1,8 +1,8 @@
 <?php
 
 namespace app\models;
-
 use core\Model;
+
 
 class Films extends Model{
 

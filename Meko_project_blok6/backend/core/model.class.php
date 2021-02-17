@@ -48,12 +48,10 @@ abstract class Model {
     {
         return $this->data[$name] ?? NULL;
     }
-    
 
 
     /** getter voor de waarde van de primary key (generiek) */
-    protected function getPrimaryValue()
-    {
+    protected function getPrimaryValue(){
         return $this->getDataField($this->primary_name);
     }
 

@@ -13,7 +13,7 @@ export default {
     navbar,
   },
 };
-</script>
+</script> 
 <style scoped>
 *, html{
   background-color: rgb(97, 97, 97);
