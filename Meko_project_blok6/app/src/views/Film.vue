@@ -20,6 +20,7 @@
             </p>
               
               
+              
             <p class="acteur">Acteurs:
               <router-link v-for="n in filmsData.acteurs" :key="n.id" to="persons" class="routerlink">
                 <span class="regisseurNaam">{{n.naam}}</span>,
