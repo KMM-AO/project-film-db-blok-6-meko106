@@ -10,8 +10,6 @@ class Films extends Model{
 
     public $persons;
 
-
-
     public function getRegisseurId(){
         return $this->getDataField('id_regisseur');
     }

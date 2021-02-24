@@ -19,7 +19,7 @@
           </ul>
           <input class="form-control me-2 nav-item" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-light nav-item" type="submit">Search</button>
-          <router-link to="/Home"><i class="fas fa-user fa-2x nav-item"></i></router-link>
+          <router-link to="/Login"><i class="fas fa-user fa-2x nav-item"></i></router-link>
 
         </form>
       </div>

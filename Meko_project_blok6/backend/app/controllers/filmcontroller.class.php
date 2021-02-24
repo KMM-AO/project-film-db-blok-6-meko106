@@ -9,7 +9,6 @@ require 'controller.class.php';
 
 class filmController extends Controller{
 
-
     public function films_index(){ // returns only jso
         $data=[];
         $films=Films::index();

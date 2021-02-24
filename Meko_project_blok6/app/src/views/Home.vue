@@ -61,6 +61,7 @@ export default {
   text-decoration: none;
 }
 
+
 ::-ms-backdrop{
     background-color: rgb(97, 97, 97);
 }

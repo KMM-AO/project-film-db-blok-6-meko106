@@ -12,6 +12,7 @@
             <p class="card-title filmNaam">{{ filmsData.naam }}</p>
             <p class="card-text filmLand">Jaar: {{ filmsData.jaar }} || Land: {{ filmsData.land }}</p>
             <p class="card-text filmBeschrijving">{{ filmsData.beschrijving }}</p>
+
             
             <p class="regisseur"> Regisseur:
               <router-link to="person" class="routerlink"> 
